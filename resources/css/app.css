@@ -10,4 +10,9 @@
     font-display: swap;
     src: url('/fonts/OpenSans-VariableFont.ttf');
   }
+
+  :root {
+    --primary-color: #63ab45;
+    --primary-color-light: #cfe1c7;
+  }
 }

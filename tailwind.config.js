@@ -1,5 +1,5 @@
-import forms from '@tailwindcss/forms';
-import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -15,8 +15,15 @@ export default {
       fontFamily: {
         sans: ['OpenSans', ...defaultTheme.fontFamily.sans],
       },
+      maxWidth: {
+        layout: '1600px',
+      },
+      colors: {
+        primary: 'var(--primary-color)',
+        'primary-light': 'var(--primary-color-light)',
+      },
     },
   },
 
   plugins: [forms],
-};
+}
