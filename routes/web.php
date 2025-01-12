@@ -9,13 +9,19 @@ Route::get('/', function () {
   return Inertia::render('Home');
 });
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
+Route::get('/tour/{id}', function (string $id) {
+  return Inertia::render('Tour', [
+    'id' => $id
+  ]);
+});
+
+// Route::get('/welcome', function () {
+//   return Inertia::render('Welcome', [
+//     'canLogin' => Route::has('login'),
+//     'canRegister' => Route::has('register'),
+//     'laravelVersion' => Application::VERSION,
+//     'phpVersion' => PHP_VERSION,
+//   ]);
 // });
 
 Route::get('/dashboard', function () {

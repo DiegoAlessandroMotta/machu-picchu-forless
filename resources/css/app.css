@@ -3,16 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: 'OpenSans';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/OpenSans-VariableFont.ttf');
-  }
-
   :root {
+    --layout-max-width: 1600px;
     --primary-color: #63ab45;
     --primary-color-light: #cfe1c7;
+    --primary-color-saturated: #2c9600;
+    --dark: #272727;
+  }
+
+  input[type='number'].hide-arrows::-webkit-outer-spin-button,
+  input[type='number'].hide-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'].hide-arrows {
+    appearance: textfield;
+    -moz-appearance: textfield;
   }
 }

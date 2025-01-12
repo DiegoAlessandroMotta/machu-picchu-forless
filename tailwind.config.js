@@ -13,14 +13,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['OpenSans', ...defaultTheme.fontFamily.sans],
+        sans: ['Open Sans Variable', ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
-        layout: '1600px',
+        layout: 'var(--layout-max-width, 1600px)',
       },
       colors: {
-        primary: 'var(--primary-color)',
-        'primary-light': 'var(--primary-color-light)',
+        primary: 'var(--primary-color, #63ab45)',
+        'primary-light': 'var(--primary-color-light, #cfe1c7)',
+        'primary-saturated': 'var(--primary-color-saturated, #2c9600)',
+        dark: 'var(--dark, #272727)',
       },
     },
   },
