@@ -1,3 +1,4 @@
+import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
 import { InputCounter } from '@/components/atoms/InputCounter'
 import { InputDate } from '@/components/atoms/InputDate'
 import { InputSelector } from '@/components/atoms/InputSelector'
@@ -31,22 +32,16 @@ export const ReservationCard = () => {
         </Label>
 
         <Label text="Country" textStyles="font-bold">
-          <InputSelector
-            options={options}
-            showDefaultDisabledOption
-          />
+          <InputSelector options={options} showDefaultDisabledOption />
         </Label>
 
         <Label text="Num Travellers" textStyles="font-bold">
           <InputCounter />
         </Label>
 
-        <button
-          className="mt-2 rounded bg-primary px-8 py-2 text-white"
-          type="submit"
-        >
+        <ButtonPrimary type="submit" fullWidth>
           Book Now!
-        </button>
+        </ButtonPrimary>
       </form>
     </div>
   )

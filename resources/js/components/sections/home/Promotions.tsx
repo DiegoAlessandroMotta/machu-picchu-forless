@@ -1,5 +1,6 @@
-import { BorderButton } from '@/components/ui/BorderButton'
+import { BorderButton } from '@/components/atoms/BorderButton'
 import { PackageCard } from '@/components/ui/PackageCard'
+import { Link } from '@inertiajs/react'
 
 export const Promotions = () => {
   return (
@@ -55,10 +56,12 @@ export const Promotions = () => {
           />
         </div>
       </div>
-      <div className='flex justify-center mt-16'>
-        <BorderButton color='var(--primary-color)'>
-          Explore all Packages
-        </BorderButton>
+      <div className="mt-16 flex justify-center">
+        <Link href="#" className="contents">
+          <BorderButton className="border-primary text-primary hover:bg-primary hover:text-white">
+            Explore all Packages
+          </BorderButton>
+        </Link>
       </div>
     </section>
   )
