@@ -70,17 +70,18 @@ export const TourInformation = ({
           </InformationCard>
         </div>
       </div>
+
       <div className="h-0.5 w-full bg-[#dee2e6]"></div>
 
-      <div className="mt-12 flex flex-wrap md:flex-nowrap gap-16">
+      <div className="mt-12 grid gap-x-12 gap-y-8 lg:grid-cols-[1fr_auto]">
         <article className="flex flex-col gap-2">
           <h3 className="text-3xl font-bold">{title}</h3>
           <p className="text-lg font-semibold">
             From <span className="text-primary">{price}</span> / {days} Days
           </p>
-          <p className="mt-2 font-light text-pretty">{description}</p>
+          <p className="mt-2 text-pretty font-light">{description}</p>
         </article>
-        {children && <aside>{children}</aside>}
+        {children && <aside className="flex justify-center">{children}</aside>}
       </div>
     </section>
   )

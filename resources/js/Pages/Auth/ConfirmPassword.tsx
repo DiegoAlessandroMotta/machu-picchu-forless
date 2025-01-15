@@ -1,5 +1,5 @@
 import InputError from '@/components/InputError';
-import InputLabel from '@/components/InputLabel';
+import Label from '@/components/InputLabel';
 import PrimaryButton from '@/components/PrimaryButton';
 import TextInput from '@/components/TextInput';
 import GuestLayout from '@/layouts/GuestLayout';
@@ -30,7 +30,7 @@ export default function ConfirmPassword() {
 
             <form onSubmit={submit}>
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <Label htmlFor="password" value="Password" />
 
                     <TextInput
                         id="password"

@@ -1,5 +1,5 @@
 import InputError from '@/components/InputError';
-import InputLabel from '@/components/InputLabel';
+import Label from '@/components/InputLabel';
 import PrimaryButton from '@/components/PrimaryButton';
 import TextInput from '@/components/TextInput';
 import GuestLayout from '@/layouts/GuestLayout';
@@ -28,7 +28,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <Label htmlFor="name" value="Name" />
 
                     <TextInput
                         id="name"
@@ -45,7 +45,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <Label htmlFor="email" value="Email" />
 
                     <TextInput
                         id="email"
@@ -62,7 +62,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <Label htmlFor="password" value="Password" />
 
                     <TextInput
                         id="password"
@@ -79,7 +79,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel
+                    <Label
                         htmlFor="password_confirmation"
                         value="Confirm Password"
                     />

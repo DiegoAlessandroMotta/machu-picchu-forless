@@ -1,6 +1,6 @@
 import Checkbox from '@/components/Checkbox';
 import InputError from '@/components/InputError';
-import InputLabel from '@/components/InputLabel';
+import Label from '@/components/InputLabel';
 import PrimaryButton from '@/components/PrimaryButton';
 import TextInput from '@/components/TextInput';
 import GuestLayout from '@/layouts/GuestLayout';
@@ -40,7 +40,7 @@ export default function Login({
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <Label htmlFor="email" value="Email" />
 
                     <TextInput
                         id="email"
@@ -57,7 +57,7 @@ export default function Login({
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <Label htmlFor="password" value="Password" />
 
                     <TextInput
                         id="password"

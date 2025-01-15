@@ -15,6 +15,10 @@ Route::get('/tour/{id}', function (string $id) {
   ]);
 });
 
+Route::get('/booking', function () {
+  return Inertia::render('Booking');
+});
+
 // Route::get('/welcome', function () {
 //   return Inertia::render('Welcome', [
 //     'canLogin' => Route::has('login'),

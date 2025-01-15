@@ -20,6 +20,7 @@ export default {
       },
       colors: {
         primary: 'var(--primary-color, #63ab45)',
+        secondary: 'var(--secondary-color, #027a7c)',
         'primary-light': 'var(--primary-color-light, #cfe1c7)',
         'primary-saturated': 'var(--primary-color-saturated, #2c9600)',
         dark: 'var(--dark, #272727)',
