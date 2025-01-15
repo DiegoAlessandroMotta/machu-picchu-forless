@@ -15,7 +15,7 @@ export const Header = () => {
           <Link href='/' prefetch>
             <figure className="contents">
               <img
-                src="/img/logo.png"
+                src="/img/logo.webp"
                 alt="Machu Picchu Forless"
                 className="h-12"
               />

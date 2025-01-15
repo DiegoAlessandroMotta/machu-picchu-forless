@@ -11,7 +11,7 @@ export const Promotions = () => {
             days={6}
             price={500}
             description="Cusco, Sacred Valley and Machu Picchu"
-            bgImgUrl="/img/heart-of-the-inca.jpg"
+            bgImgUrl="/img/heart-of-the-inca.webp"
             className="md:col-span-2"
           />
           <PackageCard
@@ -19,14 +19,14 @@ export const Promotions = () => {
             days={9}
             price={500}
             description="Galapagos, Cusco, Sacred Valley and Machu Picchu"
-            bgImgUrl="/img/cruise.png"
+            bgImgUrl="/img/cruise.webp"
           />
           <PackageCard
             title="DISCOVER MACHU PICCHU"
             days={7}
             price={500}
             description="Cusco, Rainbow Mountain, Machu Picchu & 2-day Inca Trail"
-            bgImgUrl="/img/discover-machu-picchu.jpg"
+            bgImgUrl="/img/discover-machu-picchu.webp"
           />
         </div>
 
@@ -36,21 +36,21 @@ export const Promotions = () => {
             days={11}
             price={500}
             description="Galapagos, Cusco, Sacred Valley and Machu Picchu"
-            bgImgUrl="/img/galapagos.png"
+            bgImgUrl="/img/galapagos.webp"
           />
           <PackageCard
             title="RAINBOW MOUNTAIN"
             days={6}
             price={500}
             description="Cusco, Rainbow Mountain, Machu Picchu & 2-Day Inca Trail"
-            bgImgUrl="/img/rainbow.png"
+            bgImgUrl="/img/rainbow.webp"
           />
           <PackageCard
             title="DISCOVER PERU"
             days={6}
             price={500}
             description="Cusco, Scared Valley and Machu Picchu"
-            bgImgUrl="/img/discover-peru.png"
+            bgImgUrl="/img/discover-peru.webp"
             className="md:col-span-2"
           />
         </div>

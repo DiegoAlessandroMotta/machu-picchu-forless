@@ -13,13 +13,13 @@ export const Travels = () => {
           <ExperienceCard
             title="Honeymoon Tours"
             description="Culinary enthusiasts will enjoy the rich flavors and diverse gastronomic experiences offered by renowned restaurants in the heart of Peru's stunning landscapes."
-            imgUrl="/img/experience1.jpg"
+            imgUrl="/img/experience1.webp"
             altImg="test"
           />
           <ExperienceCard
             title="Honeymoon Tours"
             description="Whether you are an active traveler, explorer, nature goer, or a relaxation lover.Peru is the perfect destination for any honeymoon or anniversary."
-            imgUrl="/img/experience2.png"
+            imgUrl="/img/cruise.webp"
             altImg="test"
           />
         </div>

@@ -6,7 +6,7 @@ export const Recomendations = () => {
       <div className='grid md:grid-cols-2 w-full'>
         <picture className="flex w-full items-center justify-center overflow-hidden">
           <img
-            src="/img/hotel-recomendation.jpg"
+            src="/img/hotel-recomendation.webp"
             alt="Foto destacada del hotel recomendado"
             loading="lazy"
             className="h-full w-full object-cover object-center"

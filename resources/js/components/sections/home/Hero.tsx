@@ -1,7 +1,7 @@
 import { Button } from '@headlessui/react'
 
 export const Hero = () => {
-  const bgImgUrl = '/img/hero-bg.jpg'
+  const bgImgUrl = '/img/hero-bg.webp'
 
   return (
     <section className="relative flex h-[520px] items-stretch 2xl:h-[620px]">

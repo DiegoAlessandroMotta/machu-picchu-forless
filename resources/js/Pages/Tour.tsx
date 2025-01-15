@@ -20,7 +20,7 @@ const tourData = {
   activityLevel: 'Moderate',
   description:
     'Embark on a journey through the heart of the Inca Empire. Delight in the exploration of Spanish colonial architecture, ancient ruins, local markets, and winding cobblestone streets. Be greeted by picturesque Andean landscapes, and exhilarate your senses with the tastes and smells of regional cuisine. This unforgettable experience concludes with the wind blowing through your hair at the legendary citadel of Machu Picchu.',
-  referencialImgUrl: '/img/heart-of-the-inca.jpg',
+  referencialImgUrl: '/img/heart-of-the-inca-full.webp',
 }
 
 const Tour = ({ id }: PageProps) => {
