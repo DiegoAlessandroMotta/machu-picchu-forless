@@ -17,7 +17,7 @@ export const InputSelector = ({
 }: Props) => {
   const defaultOption = {
     label: defaultOptionText ?? 'Choose an option',
-    value: 'default',
+    value: 'default-disabled-option',
     disabled: true,
   }
 
@@ -27,15 +27,15 @@ export const InputSelector = ({
 
   return (
     <select
-      {...props}
       className="block rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-current outline-none focus:border-blue-200 focus:ring-2 focus:ring-blue-200"
+      {...props}
     >
       {showDefaultDisabledOption && (
         <option {...defaultOption}>{defaultOption.label}</option>
       )}
 
-      {options.map((option) => (
-        <option key={String(option.value)} {...option}>
+      {options.map((option, index) => (
+        <option key={String(option.value) + index} {...option}>
           {option.label}
         </option>
       ))}

@@ -4,10 +4,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean
 }
 
-export const ButtonPrimary = ({ children, col, fullWidth, ...props }: Props) => {
+export const ButtonPrimary = ({
+  children,
+  col,
+  fullWidth,
+  ...props
+}: Props) => {
   return (
     <button
-      className={`flex ${col ? 'flex-col' : 'flex-row'} ${fullWidth ? 'w-full' : 'w-fit'} items-center justify-center gap-2 rounded-md bg-primary px-6 py-2 font-semibold text-white`}
+      className={`flex ${col ? 'flex-col' : 'flex-row'} ${fullWidth ? 'w-full' : 'w-fit'} items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 font-semibold text-white`}
       {...props}
     >
       {children}

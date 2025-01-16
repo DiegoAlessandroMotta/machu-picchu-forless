@@ -12,3 +12,13 @@ export type PageProps<
     user: User;
   };
 };
+
+export interface ReservationSummaryType {
+  pricePerPerson?: number
+  tour?: string
+  typeService?: string
+  travelDate?: string
+  alternativeDate?: string
+  numberOfTravellers?: number
+  total?: number
+}

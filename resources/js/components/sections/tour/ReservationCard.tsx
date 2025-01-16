@@ -1,6 +1,6 @@
 import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
+import { Input } from '@/components/atoms/Input'
 import { InputCounter } from '@/components/atoms/InputCounter'
-import { InputDate } from '@/components/atoms/InputDate'
 import { InputSelector } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
 
@@ -27,15 +27,15 @@ export const ReservationCard = () => {
           e.preventDefault()
         }}
       >
-        <Label text="Start Date" textStyles="font-bold">
-          <InputDate />
+        <Label text="Start Date" className="font-bold" fullWidth>
+          <Input type="date" />
         </Label>
 
-        <Label text="Country" textStyles="font-bold">
+        <Label text="Country" className="font-bold" fullWidth>
           <InputSelector options={options} showDefaultDisabledOption />
         </Label>
 
-        <Label text="Num Travellers" textStyles="font-bold">
+        <Label text="Num Travellers" className="font-bold" fullWidth>
           <InputCounter />
         </Label>
 

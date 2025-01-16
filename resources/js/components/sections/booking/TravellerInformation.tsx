@@ -1,10 +1,11 @@
 import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
-import { InputDate } from '@/components/atoms/InputDate'
+import { Input } from '@/components/atoms/Input'
+import { InputRadioCheckbox } from '@/components/atoms/InputRadioCheckbox'
 import { InputSelector } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
 import { PlusCircleIcon } from '@/components/icons/PlusCircleIcon'
 import { XCircleIcon } from '@/components/icons/XCircleIcon'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface PropsTravellerCard {
   id: number
@@ -15,10 +16,9 @@ interface PropsTravellerCard {
 const TravellerCard = ({
   id,
   onRemove,
-  hideDeleteButton,
+  hideDeleteButton
 }: PropsTravellerCard) => {
   return (
-    // <section className="overflow-hidden rounded-lg bg-white shadow-md [&_.exit-button]:first:hidden">
     <section className="overflow-hidden rounded-lg bg-white shadow-md">
       <header className="flex items-center justify-between bg-primary px-4 py-2 font-semibold text-white">
         <h3 className="flex h-8 items-center">Personal Information</h3>
@@ -36,80 +36,74 @@ const TravellerCard = ({
 
       <div className="flex flex-col gap-4 px-6 py-8 md:px-12">
         <div className="grid gap-4 md:grid-cols-2">
-          <Label text="First Name" textStyles="font-semibold">
-            <input
-              className={`block rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-current outline-none placeholder:text-zinc-400 focus:border-blue-200 focus:ring-2 focus:ring-blue-200`}
-              type="text"
-              placeholder="Bill"
-            />
+          <Label text="First Name" className="font-semibold" fullWidth>
+            <Input placeholder="Bill" />
           </Label>
-          <Label text="Last Name" textStyles="font-semibold">
-            <input
-              className={`block rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-current outline-none placeholder:text-zinc-400 focus:border-blue-200 focus:ring-2 focus:ring-blue-200`}
-              type="text"
-              placeholder="Gates"
-            />
+          <Label text="Last Name" className="font-semibold" fullWidth>
+            <Input placeholder="Gates" />
           </Label>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col">
-            <Label text="Gender" textStyles="font-semibold" />
+            <Label text="Gender" className="font-semibold" />
 
             <div className="mt-auto flex gap-8 py-2">
-              <Label
-                text="Female"
-                textAfterChildren
-                row
-                fitWidth
-                verticalCentered
-              >
-                <input type="radio" value="female" name="serviceType" />
+              <Label text="Female" textEnd row verticalCentered>
+                <InputRadioCheckbox
+                  type="radio"
+                  value="female"
+                  name="serviceType"
+                />
               </Label>
 
-              <Label
-                text="Male"
-                textAfterChildren
-                row
-                fitWidth
-                verticalCentered
-              >
-                <input type="radio" value="male" name="serviceType" />
+              <Label text="Male" textEnd row verticalCentered>
+                <InputRadioCheckbox
+                  type="radio"
+                  value="male"
+                  name="serviceType"
+                />
               </Label>
             </div>
           </div>
+
           <div>
-            <Label text="Birth Date" textStyles="font-semibold">
-              <InputDate />
+            <Label text="Birth Date" className="font-semibold" fullWidth>
+              <Input type="date" />
             </Label>
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <Label text="Doc. Type" textStyles="font-semibold">
+          <Label text="Doc. Type" className="font-semibold" fullWidth>
             <InputSelector options={[]} showDefaultDisabledOption />
           </Label>
-          <Label text="Document Number" textStyles="font-semibold">
-            <input
-              className={`block rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-current outline-none placeholder:text-zinc-400 focus:border-blue-200 focus:ring-2 focus:ring-blue-200`}
-              type="text"
-              placeholder="E00007730"
-            />
+
+          <Label text="Document Number" className="font-semibold" fullWidth>
+            <Input placeholder="E00007730" />
           </Label>
         </div>
 
         <div className="flex flex-col">
           <Label
             text="Food Restriction / Allergies ?"
-            textStyles="font-semibold"
+            className="font-semibold"
           />
 
           <div className="mt-auto flex gap-8 py-2">
-            <Label text="Yes" textAfterChildren row fitWidth verticalCentered>
-              <input type="radio" value="yes" name="serviceType" />
+            <Label text="Yes" textEnd row verticalCentered>
+              <InputRadioCheckbox
+                type="radio"
+                value="yes"
+                name="foodRestrictions"
+              />
             </Label>
-            <Label text="No" textAfterChildren row fitWidth verticalCentered>
-              <input type="radio" value="no" name="serviceType" />
+            <Label text="No" textEnd row verticalCentered>
+              <InputRadioCheckbox
+                type="radio"
+                value="no"
+                name="foodRestrictions"
+              />
             </Label>
           </div>
         </div>
@@ -118,7 +112,11 @@ const TravellerCard = ({
   )
 }
 
-export const TravellerInformation = () => {
+interface Props {
+  setNumberOfTravellers: (travellers: number) => void
+}
+
+export const TravellerInformation = ({ setNumberOfTravellers }: Props) => {
   const initialId = 1
   const [travellers, setTravellers] = useState<number[]>([initialId])
   const [nextId, setNextId] = useState(initialId + 1)
@@ -131,13 +129,17 @@ export const TravellerInformation = () => {
 
   const handleRemoveTraveller = (id: number) => {
     setTravellers((prevTravellers) =>
-      prevTravellers.filter((travellerId) => travellerId !== id),
+      prevTravellers.filter((travellerId) => travellerId !== id)
     )
   }
 
+  useEffect(() => {
+    setNumberOfTravellers(travellers.length)
+  }, [travellers])
+
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-secondary text-xl font-bold">Traveller List</h2>
+      <h2 className="text-xl font-bold text-secondary">Traveller List</h2>
 
       <div className="flex flex-col gap-4">
         {travellers.map((id) => (
