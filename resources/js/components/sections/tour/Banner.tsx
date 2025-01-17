@@ -30,10 +30,16 @@ export const Banner = ({ title, bgImgUrl, price, days }: Props) => {
               </p>
             </div>
             <div>
-              <button className="flex items-center gap-4 py-2">
-                <PlayCircleIcon className="h-12 w-12 flex-shrink-0 text-primary" />
-                <p className="text-2xl font-bold">Watch out!</p>
-              </button>
+              <a
+                href="https://www.youtube.com/@holoen_ceciliaimmergreen"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <button className="flex items-center gap-4 py-2">
+                  <PlayCircleIcon className="h-12 w-12 flex-shrink-0 text-primary" />
+                  <p className="text-2xl font-bold">Watch our Vtuber!</p>
+                </button>
+              </a>
             </div>
           </div>
         </div>

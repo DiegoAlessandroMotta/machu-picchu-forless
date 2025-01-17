@@ -101,13 +101,19 @@ export const Header = () => {
           <nav className="absolute left-1/2 hidden -translate-x-1/2 transform lg:block">
             <ul className="flex gap-2 px-2 text-black [&>li>a:hover]:text-black [&>li>a:hover]:after:bg-black [&>li>a]:inline-block [&>li>a]:rounded [&>li>a]:px-4 [&>li>a]:py-2 [&>li>a]:transition [&>li>a]:after:block [&>li>a]:after:h-[2px] [&>li>a]:after:w-full [&>li>a]:after:rounded-full [&>li>a]:after:bg-transparent [&>li>a]:after:transition [&>li>a]:after:duration-300 [&>li]:contents">
               <li>
-                <Link href="#">Tour Packages</Link>
+                <Link href="#" prefetch>
+                  Tour Packages
+                </Link>
               </li>
               <li>
-                <Link href="#">Destinations</Link>
+                <Link href="#" prefetch>
+                  Destinations
+                </Link>
               </li>
               <li>
-                <Link href="#">About us</Link>
+                <Link href="#" prefetch>
+                  About us
+                </Link>
               </li>
             </ul>
           </nav>

@@ -23,7 +23,7 @@ interface PropsTheRevenge {
 const InformationCard = ({
   children,
   label,
-  value,
+  value
 }: PropsWithChildren<PropsTheRevenge>) => {
   return (
     <div className="flex items-center gap-3">
@@ -45,7 +45,7 @@ export const TourInformation = ({
   title,
   price,
   days,
-  description,
+  description
 }: PropsWithChildren<Props>) => {
   const durationText = duration > 1 ? `${duration} Days` : `${duration} Day`
 
@@ -77,7 +77,7 @@ export const TourInformation = ({
         <article className="flex flex-col gap-2">
           <h3 className="text-3xl font-bold">{title}</h3>
           <p className="text-lg font-semibold">
-            From <span className="text-primary">{price}</span> / {days} Days
+            From <span className="text-primary">${price}</span> / {days} Days
           </p>
           <p className="mt-2 text-pretty font-light">{description}</p>
         </article>

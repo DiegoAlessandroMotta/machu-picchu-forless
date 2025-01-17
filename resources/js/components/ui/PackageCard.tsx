@@ -13,7 +13,7 @@ export const PackageCard = ({
   days,
   description,
   bgImgUrl,
-  className = '',
+  className = ''
 }: Props) => {
   return (
     <article
@@ -22,14 +22,14 @@ export const PackageCard = ({
       <div
         className="w-full overflow-x-hidden"
         style={{
-          background: `linear-gradient(180deg, #027A7C 0%, rgba(0, 0, 0, 0.00) 80%), url(${bgImgUrl}) lightgray 50% / cover no-repeat`,
+          background: `linear-gradient(180deg, #027A7C 0%, rgba(0, 0, 0, 0.00) 80%), url(${bgImgUrl}) lightgray 50% / cover no-repeat`
         }}
       ></div>
 
       <div className="ml-[-100%] flex w-full flex-col items-center gap-4 px-3 py-6 text-center text-white">
-        <h3 className="text-3xl font-bold">{title}</h3>
+        <h3 className="text-2xl font-bold lg:text-3xl">{title}</h3>
         <div className="flex items-center gap-2">
-          <span className="bg-primary rounded-full px-4 py-2 font-semibold">
+          <span className="rounded-full bg-primary px-4 py-1 font-semibold">
             {days} Days
           </span>
           <span>From ${price}</span>
