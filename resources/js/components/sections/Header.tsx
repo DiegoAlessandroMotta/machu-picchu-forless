@@ -135,7 +135,7 @@ export const Header = () => {
             <XMarkIcon className="x-mark-icon hidden h-8 w-8 text-black" />
           </div>
         </div>
-        <div className="mobile-menu absolute left-0 top-0 flex h-0 w-full flex-col justify-center overflow-y-hidden bg-white/70 backdrop-blur transition-all duration-300 md:hidden">
+        <div className="mobile-menu absolute left-0 top-0 flex h-0 w-full flex-col justify-center overflow-y-hidden bg-white/70 backdrop-blur transition-all duration-300 lg:hidden">
           <ul className="mx-auto flex w-fit flex-col items-center px-2 text-black [&>li>a:hover]:text-black [&>li>a:hover]:after:bg-black [&>li>a]:inline-block [&>li>a]:rounded [&>li>a]:px-4 [&>li>a]:py-2 [&>li>a]:transition [&>li>a]:after:block [&>li>a]:after:h-[2px] [&>li>a]:after:w-full [&>li>a]:after:rounded-full [&>li>a]:after:bg-transparent [&>li>a]:after:transition [&>li>a]:after:duration-300 [&>li]:contents">
             <li>
               <Link href="#">Tour Packages</Link>

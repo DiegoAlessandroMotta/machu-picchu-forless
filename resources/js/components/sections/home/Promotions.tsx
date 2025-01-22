@@ -1,57 +1,7 @@
 import { BorderButton } from '@/components/atoms/BorderButton'
 import { PackageCard } from '@/components/ui/PackageCard'
+import toursData from '@/mocks/tours.json'
 import { Link } from '@inertiajs/react'
-
-const data = [
-  {
-    id: 'hear-of-the-inca',
-    title: 'HEART OF THE INCA',
-    days: 6,
-    price: 500,
-    description: 'Cusco, Sacred Valley and Machu Picchu',
-    bgImgUrl: '/img/heart-of-the-inca.webp'
-  },
-  {
-    id: 'amazon-river-cruise-and-machu-picchu',
-    title: 'AMAZON RIVER CRUISE AND MACHU PICCHU',
-    days: 9,
-    price: 500,
-    description: 'Galapagos, Cusco, Sacred Valley and Machu Picchu',
-    bgImgUrl: '/img/cruise.webp'
-  },
-  {
-    id: 'discover-machu-picchu',
-    title: 'DISCOVER MACHU PICCHU',
-    days: 7,
-    price: 500,
-    description: 'Cusco, Rainbow Mountain, Machu Picchu & 2-day Inca Trail',
-    bgImgUrl: '/img/discover-machu-picchu.webp'
-  },
-  {
-    id: 'machu-picchu-galapagos',
-    title: 'MACHU PICCHU & GALAPAGOS',
-    days: 11,
-    price: 500,
-    description: 'Galapagos, Cusco, Sacred Valley and Machu Picchu',
-    bgImgUrl: '/img/galapagos.webp'
-  },
-  {
-    id: 'rainbow-mountain',
-    title: 'RAINBOW MOUNTAIN',
-    days: 6,
-    price: 500,
-    description: 'Cusco, Rainbow Mountain, Machu Picchu & 2-Day Inca Trail',
-    bgImgUrl: '/img/rainbow.webp'
-  },
-  {
-    id: 'discover-peru',
-    title: 'DISCOVER PERU',
-    days: 6,
-    price: 500,
-    description: 'Cusco, Scared Valley and Machu Picchu',
-    bgImgUrl: '/img/discover-peru.webp'
-  }
-]
 
 function chunks<T>(arr: T[], chunkSize: number) {
   const chunksArray = []
@@ -64,7 +14,7 @@ function chunks<T>(arr: T[], chunkSize: number) {
 }
 
 export const Promotions = () => {
-  const chunkedData = chunks(data, 3)
+  const chunkedData = chunks(toursData, 3)
 
   return (
     <section className="px-4 md:px-8">
@@ -73,7 +23,7 @@ export const Promotions = () => {
           const colSpan2Start = index % 2 == 0
 
           return (
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2" key={promotions[0].id}>
               {promotions.map((promotion, index) => {
                 const style = 'md:col-span-2'
                 const className =
@@ -87,6 +37,7 @@ export const Promotions = () => {
                     href={`/tour/${promotion.id}`}
                     className="contents"
                     prefetch
+                    key={promotion.id}
                   >
                     <PackageCard
                       title={promotion.title}

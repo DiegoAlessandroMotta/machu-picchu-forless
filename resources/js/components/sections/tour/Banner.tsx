@@ -37,7 +37,7 @@ export const Banner = ({ title, bgImgUrl, price, days }: Props) => {
               >
                 <button className="flex items-center gap-4 py-2">
                   <PlayCircleIcon className="h-12 w-12 flex-shrink-0 text-primary" />
-                  <p className="text-2xl font-bold">Watch our Vtuber!</p>
+                  <p className="text-2xl font-bold">Watch our Virtual Tour</p>
                 </button>
               </a>
             </div>

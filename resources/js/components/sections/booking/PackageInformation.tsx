@@ -2,44 +2,85 @@ import { Input } from '@/components/atoms/Input'
 import { InputRadioCheckbox } from '@/components/atoms/InputRadioCheckbox'
 import { InputSelector } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
+import toursData from '@/mocks/tours.json'
+import { useEffect, useState } from 'react'
 
 interface Props {
-  onInputChange: () => void
+  refreshSummary: () => void
 }
 
-const options = [
-  {
-    label: 'Heart of the Inca',
-    value: 'heart-of-the-inca'
-  },
-  {
-    label: 'Package 2',
-    value: 'package-2'
-  },
-  {
-    label: 'Package 3',
-    value: 'package-3'
-  }
-]
+interface QueryParamsType {
+  startDate?: string
+  country?: string
+  selectedPackage?: string
+}
 
-export const PackageInformation = ({ onInputChange }: Props) => {
+const packageOptions = toursData.map((tour) => ({
+  label: tour.title,
+  value: tour.id
+}))
+
+export const PackageInformation = ({ refreshSummary }: Props) => {
+  const [formData, setFormData] = useState<QueryParamsType>(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+
+    const data = {
+      startDate: urlParams.get('startDate'),
+      country: urlParams.get('country'),
+      numTravellers: urlParams.get('numTravellers'),
+      selectedPackage: urlParams.get('selectedPackage')
+    }
+
+    return {
+      startDate: data.startDate ?? undefined,
+      country: data.country ?? undefined,
+      selectedPackage: data.selectedPackage ?? undefined
+    }
+  })
+
+  useEffect(() => {
+    //   const urlParams = new URLSearchParams(window.location.search)
+
+    //   const data = {
+    //     startDate: urlParams.get('startDate'),
+    //     country: urlParams.get('country'),
+    //     numTravellers: urlParams.get('numTravellers'),
+    //     selectedPackage: urlParams.get('selectedPackage')
+    //   }
+
+    //   setFormData({
+    //     startDate: data.startDate ?? undefined,
+    //     country: data.country ?? undefined,
+    //     selectedPackage: data.selectedPackage ?? undefined
+    //   })
+
+    refreshSummary()
+  }, [])
+
   return (
     <section className="flex flex-col gap-4 rounded-lg bg-white px-6 py-8 shadow-md md:px-12">
       <Label text="Packages" className="font-semibold" fullWidth>
         <InputSelector
-          options={options}
+          options={packageOptions}
           showDefaultDisabledOption
           name="selectedPackage"
-          onChange={onInputChange}
+          onChange={refreshSummary}
+          defaultValue={formData.selectedPackage}
+          required
         />
       </Label>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Label text="Name" className="font-semibold" fullWidth>
-          <Input placeholder="Bill Gates" />
+        <Label text="Full Name" className="font-semibold" fullWidth>
+          <Input name="clientFullName" placeholder="Bill Gates" required />
         </Label>
         <Label text="Email" className="font-semibold" fullWidth>
-          <Input type="email" placeholder="billgs@domain.com" />
+          <Input
+            name="clientEmail"
+            type="email"
+            placeholder="billgs@domain.com"
+            required
+          />
         </Label>
       </div>
 
@@ -52,7 +93,8 @@ export const PackageInformation = ({ onInputChange }: Props) => {
               type="radio"
               value="group"
               name="serviceType"
-              onChange={onInputChange}
+              onChange={refreshSummary}
+              required
             />
           </Label>
 
@@ -61,7 +103,8 @@ export const PackageInformation = ({ onInputChange }: Props) => {
               type="radio"
               value="private"
               name="serviceType"
-              onChange={onInputChange}
+              onChange={refreshSummary}
+              required
             />
           </Label>
         </div>
@@ -69,10 +112,21 @@ export const PackageInformation = ({ onInputChange }: Props) => {
 
       <div className="grid gap-4 md:grid-cols-2">
         <Label text="Start Date" className="font-semibold" fullWidth>
-          <Input type="date" name="startDate" onChange={onInputChange} />
+          <Input
+            type="date"
+            name="startDate"
+            onChange={refreshSummary}
+            defaultValue={formData.startDate}
+            required
+          />
         </Label>
         <Label text="Alternative Date" className="font-semibold" fullWidth>
-          <Input type="date" name="alternativeDate" onChange={onInputChange} />
+          <Input
+            type="date"
+            name="alternativeDate"
+            onChange={refreshSummary}
+            required
+          />
         </Label>
       </div>
     </section>

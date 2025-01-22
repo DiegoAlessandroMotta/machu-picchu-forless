@@ -37,10 +37,10 @@ const TravellerCard = ({
       <div className="flex flex-col gap-4 px-6 py-8 md:px-12">
         <div className="grid gap-4 md:grid-cols-2">
           <Label text="First Name" className="font-semibold" fullWidth>
-            <Input placeholder="Bill" />
+            <Input name="travellerFirstName" placeholder="Bill" required />
           </Label>
           <Label text="Last Name" className="font-semibold" fullWidth>
-            <Input placeholder="Gates" />
+            <Input name="travellerLastName" placeholder="Gates" required />
           </Label>
         </div>
 
@@ -53,7 +53,8 @@ const TravellerCard = ({
                 <InputRadioCheckbox
                   type="radio"
                   value="female"
-                  name="serviceType"
+                  name="travellerGender"
+                  required
                 />
               </Label>
 
@@ -61,7 +62,8 @@ const TravellerCard = ({
                 <InputRadioCheckbox
                   type="radio"
                   value="male"
-                  name="serviceType"
+                  name="travellerGender"
+                  required
                 />
               </Label>
             </div>
@@ -69,18 +71,23 @@ const TravellerCard = ({
 
           <div>
             <Label text="Birth Date" className="font-semibold" fullWidth>
-              <Input type="date" />
+              <Input type="date" name="travellerBirthdate" required />
             </Label>
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <Label text="Doc. Type" className="font-semibold" fullWidth>
-            <InputSelector options={[]} showDefaultDisabledOption />
+            <InputSelector
+              name="travellerDocType"
+              options={[]}
+              showDefaultDisabledOption
+              required
+            />
           </Label>
 
           <Label text="Document Number" className="font-semibold" fullWidth>
-            <Input placeholder="E00007730" />
+            <Input name="travellerDocNumber" placeholder="E00007730" required />
           </Label>
         </div>
 
@@ -95,14 +102,16 @@ const TravellerCard = ({
               <InputRadioCheckbox
                 type="radio"
                 value="yes"
-                name="foodRestrictions"
+                name="travellerFoodRestrictions"
+                required
               />
             </Label>
             <Label text="No" textEnd row verticalCentered>
               <InputRadioCheckbox
                 type="radio"
                 value="no"
-                name="foodRestrictions"
+                name="travellerFoodRestrictions"
+                required
               />
             </Label>
           </div>
@@ -116,10 +125,27 @@ interface Props {
   setNumberOfTravellers: (travellers: number) => void
 }
 
-export const TravellerInformation = ({ setNumberOfTravellers }: Props) => {
+export const TravellersInformation = ({ setNumberOfTravellers }: Props) => {
   const initialId = 1
-  const [travellers, setTravellers] = useState<number[]>([initialId])
   const [nextId, setNextId] = useState(initialId + 1)
+  const [travellers, setTravellers] = useState<number[]>(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+
+    const data = {
+      numTravellers: urlParams.get('numTravellers')
+    }
+
+    const initialTravellers =
+      !data.numTravellers || isNaN(Number(data.numTravellers))
+        ? [initialId]
+        : Array.from({ length: Number(data.numTravellers) }).map(
+            (_, index) => index + 1
+          )
+
+    setNextId(initialTravellers.length + 1)
+
+    return initialTravellers
+  })
 
   const handleAddTraveller = () => {
     const newId = nextId

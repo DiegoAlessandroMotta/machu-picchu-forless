@@ -27,7 +27,7 @@ export const PackageCard = ({
       ></div>
 
       <div className="ml-[-100%] flex w-full flex-col items-center gap-4 px-3 py-6 text-center text-white">
-        <h3 className="text-2xl font-bold lg:text-3xl">{title}</h3>
+        <h3 className="text-2xl font-bold uppercase lg:text-3xl">{title}</h3>
         <div className="flex items-center gap-2">
           <span className="rounded-full bg-primary px-4 py-1 font-semibold">
             {days} Days

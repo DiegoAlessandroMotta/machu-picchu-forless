@@ -5,7 +5,7 @@ interface PropsShowValue {
   value: string | number
 }
 
-const ShowValue = ({ label, value }: PropsShowValue) => {
+const CustomLabel = ({ label, value }: PropsShowValue) => {
   return (
     <div className="flex gap-2">
       <span className="font-semibold">{label}</span>
@@ -21,7 +21,7 @@ interface Props {
 export const ReservationSummary = ({ data }: Props) => {
   const {
     pricePerPerson = 0,
-    tour = 'Not selected',
+    tour = '',
     typeService = '',
     travelDate = '',
     alternativeDate = '',
@@ -30,7 +30,7 @@ export const ReservationSummary = ({ data }: Props) => {
   } = data
 
   return (
-    <section className="flex h-fit w-fit flex-col gap-4 rounded-lg bg-white shadow-md lg:min-w-96">
+    <section className="mx-auto flex h-fit w-full flex-col gap-4 rounded-lg bg-white shadow-md md:w-fit lg:min-w-96">
       <div className="flex flex-col px-6 pt-8">
         <header className="mb-4 text-center">
           {pricePerPerson > 0 && (
@@ -48,11 +48,14 @@ export const ReservationSummary = ({ data }: Props) => {
         </header>
 
         <div className="flex flex-col gap-2">
-          <ShowValue label="Tour:" value={tour} />
-          <ShowValue label="Type Service:" value={typeService} />
-          <ShowValue label="Travel Date:" value={travelDate} />
-          <ShowValue label="Alternative Date:" value={alternativeDate} />
-          <ShowValue label="Number of Travellers:" value={numberOfTravellers} />
+          <CustomLabel label="Tour:" value={tour} />
+          <CustomLabel label="Type Service:" value={typeService} />
+          <CustomLabel label="Travel Date:" value={travelDate} />
+          <CustomLabel label="Alternative Date:" value={alternativeDate} />
+          <CustomLabel
+            label="Number of Travellers:"
+            value={numberOfTravellers}
+          />
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import { Banner } from '@/components/sections/tour/Banner'
 import { ReservationCard } from '@/components/sections/tour/ReservationCard'
 import { TourInformation } from '@/components/sections/tour/TourInformation'
 import MainLayout from '@/layouts/MainLayout'
+import toursData from '@/mocks/tours.json'
 import { Head } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 
@@ -22,86 +23,11 @@ interface TourType {
   activityLevel: string
 }
 
-const data = [
-  {
-    id: 'hear-of-the-inca',
-    title: 'HEART OF THE INCA',
-    days: 6,
-    price: 500,
-    description: 'Cusco, Sacred Valley and Machu Picchu',
-    bgImgUrl: '/img/heart-of-the-inca.webp',
-    duration: 1,
-    typeOfService: 'Private Service',
-    maxAltitude: 'Ananiso Canyon Tour',
-    activityLevel: 'Moderate'
-  },
-  {
-    id: 'amazon-river-cruise-and-machu-picchu',
-    title: 'AMAZON RIVER CRUISE AND MACHU PICCHU',
-    days: 9,
-    price: 500,
-    description: 'Galapagos, Cusco, Sacred Valley and Machu Picchu',
-    bgImgUrl: '/img/cruise.webp',
-    duration: 1,
-    typeOfService: 'Private Service',
-    maxAltitude: 'Ananiso Canyon Tour',
-    activityLevel: 'Moderate'
-  },
-  {
-    id: 'discover-machu-picchu',
-    title: 'DISCOVER MACHU PICCHU',
-    days: 7,
-    price: 500,
-    description: 'Cusco, Rainbow Mountain, Machu Picchu & 2-day Inca Trail',
-    bgImgUrl: '/img/discover-machu-picchu.webp',
-    duration: 1,
-    typeOfService: 'Private Service',
-    maxAltitude: 'Ananiso Canyon Tour',
-    activityLevel: 'Moderate'
-  },
-  {
-    id: 'machu-picchu-galapagos',
-    title: 'MACHU PICCHU & GALAPAGOS',
-    days: 11,
-    price: 500,
-    description: 'Galapagos, Cusco, Sacred Valley and Machu Picchu',
-    bgImgUrl: '/img/galapagos.webp',
-    duration: 1,
-    typeOfService: 'Private Service',
-    maxAltitude: 'Ananiso Canyon Tour',
-    activityLevel: 'Moderate'
-  },
-  {
-    id: 'rainbow-mountain',
-    title: 'RAINBOW MOUNTAIN',
-    days: 6,
-    price: 500,
-    description: 'Cusco, Rainbow Mountain, Machu Picchu & 2-Day Inca Trail',
-    bgImgUrl: '/img/rainbow.webp',
-    duration: 1,
-    typeOfService: 'Private Service',
-    maxAltitude: 'Ananiso Canyon Tour',
-    activityLevel: 'Moderate'
-  },
-  {
-    id: 'discover-peru',
-    title: 'DISCOVER PERU',
-    days: 6,
-    price: 500,
-    description: 'Cusco, Scared Valley and Machu Picchu',
-    bgImgUrl: '/img/discover-peru.webp',
-    duration: 1,
-    typeOfService: 'Private Service',
-    maxAltitude: 'Ananiso Canyon Tour',
-    activityLevel: 'Moderate'
-  }
-]
-
 const Tour = ({ id }: PageProps) => {
   const [tourData, setTourData] = useState<TourType>()
 
   useEffect(() => {
-    const currentTour = data.find((tour) => {
+    const currentTour = toursData.find((tour) => {
       return tour.id === id
     })
 
@@ -132,7 +58,7 @@ const Tour = ({ id }: PageProps) => {
               days={tourData.days}
               description={tourData.description}
             >
-              <ReservationCard />
+              <ReservationCard packageId={id} />
             </TourInformation>
           </>
         )}

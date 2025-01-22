@@ -3,19 +3,51 @@ import { Input } from '@/components/atoms/Input'
 import { InputCounter } from '@/components/atoms/InputCounter'
 import { InputSelector } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
+import { router } from '@inertiajs/react'
+import { useRef } from 'react'
 
-const options = [
+interface Props {
+  packageId: string
+}
+
+const countryOptions = [
   {
-    label: 'Nice',
-    value: 69,
+    label: 'United States',
+    value: 'united-states'
   },
   {
-    label: 'Huh?',
-    value: 8008,
-  },
+    label: 'Perú',
+    value: 'peru'
+  }
 ]
 
-export const ReservationCard = () => {
+export const ReservationCard = ({ packageId }: Props) => {
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (formRef.current === null) {
+      return
+    }
+
+    const formData = new FormData(formRef.current)
+    const data = Object.fromEntries(formData.entries())
+
+    const startDate = data?.startDate
+    const country = data?.country
+    const numTravellers = data?.numTravellers
+
+    router.visit('/booking', {
+      data: {
+        startDate,
+        country,
+        numTravellers,
+        selectedPackage: packageId
+      }
+    })
+  }
+
   return (
     <div className="w-96 overflow-hidden rounded-lg shadow-md">
       <div className="bg-primary px-8 py-4 text-center text-lg text-white">
@@ -23,20 +55,23 @@ export const ReservationCard = () => {
       </div>
       <form
         className="flex flex-col gap-3 bg-white px-8 py-8"
-        onSubmit={(e) => {
-          e.preventDefault()
-        }}
+        onSubmit={handleSubmitForm}
+        ref={formRef}
       >
         <Label text="Start Date" className="font-bold" fullWidth>
-          <Input type="date" />
+          <Input type="date" name="startDate" />
         </Label>
 
         <Label text="Country" className="font-bold" fullWidth>
-          <InputSelector options={options} showDefaultDisabledOption />
+          <InputSelector
+            options={countryOptions}
+            showDefaultDisabledOption
+            name="country"
+          />
         </Label>
 
         <Label text="Num Travellers" className="font-bold" fullWidth>
-          <InputCounter />
+          <InputCounter name="numTravellers" />
         </Label>
 
         <ButtonPrimary type="submit" fullWidth>
