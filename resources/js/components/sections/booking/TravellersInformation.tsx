@@ -13,6 +13,21 @@ interface PropsTravellerCard {
   hideDeleteButton: boolean
 }
 
+const docTypes = [
+  {
+    label: 'DNI/ID',
+    value: 'dni-id'
+  },
+  {
+    label: 'Passport',
+    value: 'passport'
+  },
+  {
+    label: 'Driver License',
+    value: 'driver-license'
+  }
+]
+
 const TravellerCard = ({
   id,
   onRemove,
@@ -80,7 +95,7 @@ const TravellerCard = ({
           <Label text="Doc. Type" className="font-semibold" fullWidth>
             <InputSelector
               name="travellerDocType"
-              options={[]}
+              options={docTypes}
               showDefaultDisabledOption
               required
             />

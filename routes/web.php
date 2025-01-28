@@ -19,6 +19,11 @@ Route::get('/booking', function () {
   return Inertia::render('Booking');
 });
 
+// Route::get('/download-file', function () {
+//   $path = storage_path('app/private/file.jpg');
+//   return response()->download($path);
+// });
+
 // Route::get('/welcome', function () {
 //   return Inertia::render('Welcome', [
 //     'canLogin' => Route::has('login'),
