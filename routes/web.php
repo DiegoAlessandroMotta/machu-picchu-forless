@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-// use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,6 +17,14 @@ Route::get('/tour/{id}', function (string $id) {
 Route::get('/booking', function () {
   return Inertia::render('Booking');
 });
+
+Route::get('/paypal-test', function () {
+  return Inertia::render('PaypalTest');
+});
+
+// Route::post('/api/checkout', [PayPalController::class, 'create']);
+
+// Route::get('/datos', [MiControlador::class, 'obtenerDatos'])
 
 // Route::get('/download-file', function () {
 //   $path = storage_path('app/private/file.jpg');
