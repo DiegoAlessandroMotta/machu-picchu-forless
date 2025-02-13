@@ -1,31 +1,38 @@
 import { MinusIcon } from '@/components/icons/MinusIcon'
 import { PlusIcon } from '@/components/icons/PlusIcon'
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   min?: number
   max?: number
+  defaultValue?: number
 }
 
-export const InputCounter = ({ min, max, type, ...rest }: Props) => {
-  const [counter, setCounter] = useState<number>(min ?? 1)
-  const minValue = min ?? 1
-  const maxValue = max ?? 100
+export const InputCounter = ({
+  min,
+  max,
+  type,
+  defaultValue,
+  ...rest
+}: Props) => {
+  const [counter, setCounter] = useState<number>(defaultValue ?? min ?? 1)
+  const minValue = useMemo(() => min ?? 1, [])
+  const maxValue = useMemo(() => max ?? 100, [])
 
-  const decrementCounter = () => {
+  const decrementCounter = useCallback(() => {
     setCounter((prev) => Math.max(prev - 1, minValue))
-  }
+  }, [counter])
 
-  const incrementCounter = () => {
+  const incrementCounter = useCallback(() => {
     setCounter((prev) => Math.min(prev + 1, maxValue))
-  }
+  }, [counter])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value)
     if (!isNaN(newValue) && newValue >= minValue && newValue <= maxValue) {
       setCounter(newValue)
     }
-  }
+  }, [])
 
   return (
     <div className="flex items-center gap-2">
@@ -42,6 +49,7 @@ export const InputCounter = ({ min, max, type, ...rest }: Props) => {
         value={counter}
         min={minValue}
         max={maxValue}
+        defaultValue={defaultValue}
         onChange={handleChange}
         className="hide-arrows rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center text-gray-900 outline-none focus:border-blue-200 focus:ring-2 focus:ring-blue-200"
         {...rest}

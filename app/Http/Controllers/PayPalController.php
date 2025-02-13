@@ -65,7 +65,14 @@ class PayPalController extends Controller
     return response()->json($orderId);
   }
 
-  public function capture(Request $request) {}
+  public function capture(Request $request)
+  {
+    $id = $request->all()['id'];
+
+    $provider = new PayPalClient;
+    $provider->getAccessToken();
+    $order = $provider->capturePaymentOrder($id);
+  }
 
   public function complete() {}
 }
