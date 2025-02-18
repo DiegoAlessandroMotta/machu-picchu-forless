@@ -3,7 +3,8 @@ import { InputRadioCheckbox } from '@/components/atoms/InputRadioCheckbox'
 import { InputSelector } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
 import toursData from '@/mocks/tours.json'
-import { useEffect, useState } from 'react'
+import { BookingContext } from '@/Pages/Booking'
+import { useContext, useEffect, useState } from 'react'
 
 interface Props {
   refreshSummary: () => void
@@ -39,23 +40,10 @@ export const PackageInformation = ({ refreshSummary }: Props) => {
   })
 
   useEffect(() => {
-    //   const urlParams = new URLSearchParams(window.location.search)
-
-    //   const data = {
-    //     startDate: urlParams.get('startDate'),
-    //     country: urlParams.get('country'),
-    //     numTravellers: urlParams.get('numTravellers'),
-    //     selectedPackage: urlParams.get('selectedPackage')
-    //   }
-
-    //   setFormData({
-    //     startDate: data.startDate ?? undefined,
-    //     country: data.country ?? undefined,
-    //     selectedPackage: data.selectedPackage ?? undefined
-    //   })
-
     refreshSummary()
   }, [])
+
+  const bookingInformation = useContext(BookingContext)
 
   return (
     <section className="flex flex-col gap-4 rounded-lg bg-white px-6 py-8 shadow-md md:px-12">

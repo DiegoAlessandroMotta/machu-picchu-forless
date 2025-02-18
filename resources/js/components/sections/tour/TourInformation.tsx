@@ -2,7 +2,16 @@ import { ClockIcon } from '@/components/icons/ClockIcon'
 import { HikingIcon } from '@/components/icons/HikingIcon'
 import { MountainIcon } from '@/components/icons/MountainIcon'
 import { NotebookIcon } from '@/components/icons/NotebookIcon'
+import { Gallery } from '@/components/ui/Galllery'
+import toursData from '@/mocks/tours.json'
 import { PropsWithChildren } from 'react'
+
+const toursElements = toursData.map((tour) => ({
+  id: tour.id,
+  thumbnail: tour.bgImgUrl,
+  fullImage: tour.bgImgUrl,
+  description: tour.description
+}))
 
 interface Props {
   duration: number
@@ -73,7 +82,7 @@ export const TourInformation = ({
 
       <div className="h-0.5 w-full bg-[#dee2e6]"></div>
 
-      <div className="mt-12 grid gap-x-12 gap-y-8 lg:grid-cols-[1fr_auto]">
+      <div className="mx-auto mt-12 grid max-w-layout gap-x-12 gap-y-8 lg:grid-cols-[1fr_auto]">
         <article className="flex flex-col gap-2">
           <h3 className="text-3xl font-bold">{title}</h3>
           <p className="text-lg font-semibold">
@@ -83,6 +92,12 @@ export const TourInformation = ({
         </article>
         {children && <aside className="flex justify-center">{children}</aside>}
       </div>
+
+      <div className="mx-auto flex max-w-layout flex-col pt-16">
+        <Gallery elements={toursElements} className="flex flex-wrap gap-4" />
+      </div>
+
+      <div className="mx-auto mt-12 max-w-layout"></div>
     </section>
   )
 }

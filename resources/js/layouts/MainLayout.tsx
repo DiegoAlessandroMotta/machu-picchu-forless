@@ -1,5 +1,5 @@
-import { Footer } from '@/components/sections/Footer'
-import { Header } from '@/components/sections/Header'
+import { Footer } from '@/components/sections/general/Footer'
+import { Header } from '@/components/sections/general/Header'
 import { PropsWithChildren } from 'react'
 
 export default function MainLayout({ children }: PropsWithChildren) {

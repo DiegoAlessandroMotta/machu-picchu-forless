@@ -6,7 +6,32 @@ import MainLayout from '@/layouts/MainLayout'
 import { ReservationSummaryType } from '@/types'
 import { formatInputDateValue } from '@/utils/format-values'
 import { Head } from '@inertiajs/react'
-import { useRef, useState } from 'react'
+import { createContext, useRef, useState } from 'react'
+
+interface BookingInformationForm {
+  package: string
+  fullName: string
+  email: string
+  serviceType: string
+  country: string
+  startDate: Date
+  alternativeDate: Date
+  Travellers: {
+    firstName: string
+    lastName: string
+    gender: string
+    birhtdayDate: Date
+    docType: string
+    docNumber: string
+    foodRestrictions: string
+  }[]
+  aditionalDescription: string
+  temporalName: string
+}
+
+export const BookingContext = createContext<BookingInformationForm | undefined>(
+  undefined
+)
 
 const Booking = () => {
   const [summaryInformation, setSummaryInformation] =
@@ -63,25 +88,29 @@ const Booking = () => {
     console.log(data)
   }
 
+  const [bookingInformation] = useState<BookingInformationForm | undefined>()
+
   return (
     <>
       <Head title="Machu Picchu Forless" />
       <MainLayout>
         <div className="px-4 md:px-8">
-          <div className="mx-auto grid max-w-layout gap-x-8 gap-y-16 py-8 lg:grid-cols-[60fr,_40fr]">
-            <form
-              className="flex flex-col gap-8"
-              ref={formRef}
-              onSubmit={handleSubmitForm}
-            >
-              <PackageInformation refreshSummary={refreshSummary} />
-              <TravellersInformation
-                setNumberOfTravellers={setNumberOfTravellers}
-              />
-              <ExtraInformation />
-            </form>
-            <ReservationSummary data={summaryInformation} />
-          </div>
+          <BookingContext.Provider value={bookingInformation}>
+            <div className="mx-auto grid max-w-layout gap-x-8 gap-y-16 py-8 lg:grid-cols-[60fr,_40fr]">
+              <form
+                className="flex flex-col gap-8"
+                ref={formRef}
+                onSubmit={handleSubmitForm}
+              >
+                <PackageInformation refreshSummary={refreshSummary} />
+                <TravellersInformation
+                  setNumberOfTravellers={setNumberOfTravellers}
+                />
+                <ExtraInformation />
+              </form>
+              <ReservationSummary data={summaryInformation} />
+            </div>
+          </BookingContext.Provider>
         </div>
       </MainLayout>
     </>

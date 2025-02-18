@@ -22,6 +22,10 @@ Route::get('/paypal-test', function () {
   return Inertia::render('PaypalTest');
 });
 
+Route::get('/gallery-test', function () {
+  return Inertia::render('GalleryTest');
+});
+
 // Route::post('/api/checkout', [PayPalController::class, 'create']);
 
 // Route::get('/datos', [MiControlador::class, 'obtenerDatos'])

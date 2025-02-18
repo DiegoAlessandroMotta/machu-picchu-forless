@@ -30,11 +30,7 @@ export const Banner = ({ title, bgImgUrl, price, days }: Props) => {
               </p>
             </div>
             <div>
-              <a
-                href="https://www.youtube.com/@holoen_ceciliaimmergreen"
-                rel="noreferrer"
-                target="_blank"
-              >
+              <a href="#">
                 <button className="flex items-center gap-4 py-2">
                   <PlayCircleIcon className="h-12 w-12 flex-shrink-0 text-primary" />
                   <p className="text-2xl font-bold">Watch our Virtual Tour</p>

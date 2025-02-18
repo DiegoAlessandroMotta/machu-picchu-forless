@@ -49,7 +49,6 @@ export const InputCounter = ({
         value={counter}
         min={minValue}
         max={maxValue}
-        defaultValue={defaultValue}
         onChange={handleChange}
         className="hide-arrows rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center text-gray-900 outline-none focus:border-blue-200 focus:ring-2 focus:ring-blue-200"
         {...rest}
