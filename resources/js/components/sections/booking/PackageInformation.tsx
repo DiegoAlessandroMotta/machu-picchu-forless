@@ -3,8 +3,7 @@ import { InputRadioCheckbox } from '@/components/atoms/InputRadioCheckbox'
 import { InputSelector } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
 import toursData from '@/mocks/tours.json'
-import { BookingContext } from '@/Pages/Booking'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   refreshSummary: () => void
@@ -16,13 +15,24 @@ interface QueryParamsType {
   selectedPackage?: string
 }
 
+const countryOptions = [
+  {
+    label: 'United States',
+    value: 'united-states'
+  },
+  {
+    label: 'Perú',
+    value: 'peru'
+  }
+]
+
 const packageOptions = toursData.map((tour) => ({
   label: tour.title,
   value: tour.id
 }))
 
 export const PackageInformation = ({ refreshSummary }: Props) => {
-  const [formData, setFormData] = useState<QueryParamsType>(() => {
+  const [formData] = useState<QueryParamsType>(() => {
     const urlParams = new URLSearchParams(window.location.search)
 
     const data = {
@@ -41,9 +51,9 @@ export const PackageInformation = ({ refreshSummary }: Props) => {
 
   useEffect(() => {
     refreshSummary()
-  }, [])
+  }, [refreshSummary])
 
-  const bookingInformation = useContext(BookingContext)
+  // const bookingInformation = useBookingContext()
 
   return (
     <section className="flex flex-col gap-4 rounded-lg bg-white px-6 py-8 shadow-md md:px-12">
@@ -72,26 +82,41 @@ export const PackageInformation = ({ refreshSummary }: Props) => {
         </Label>
       </div>
 
-      <div className="flex flex-col">
-        <Label text="Group or private Service" className="font-semibold" />
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex flex-col">
+          <Label text="Group or private Service" className="font-semibold" />
 
-        <div className="mt-auto flex gap-8 py-2">
-          <Label text="Group" textEnd row verticalCentered>
-            <InputRadioCheckbox
-              type="radio"
-              value="group"
-              name="serviceType"
-              onChange={refreshSummary}
-              required
-            />
-          </Label>
+          <div className="mt-auto flex gap-8 py-2">
+            <Label text="Group" textEnd row verticalCentered>
+              <InputRadioCheckbox
+                type="radio"
+                value="group"
+                name="serviceType"
+                onChange={refreshSummary}
+                required
+              />
+            </Label>
 
-          <Label text="Private" textEnd row verticalCentered>
-            <InputRadioCheckbox
-              type="radio"
-              value="private"
-              name="serviceType"
+            <Label text="Private" textEnd row verticalCentered>
+              <InputRadioCheckbox
+                type="radio"
+                value="private"
+                name="serviceType"
+                onChange={refreshSummary}
+                required
+              />
+            </Label>
+          </div>
+        </div>
+
+        <div>
+          <Label text="Country" className="font-semibold" fullWidth>
+            <InputSelector
+              options={countryOptions}
+              showDefaultDisabledOption
+              name="country"
               onChange={refreshSummary}
+              defaultValue={formData.country}
               required
             />
           </Label>

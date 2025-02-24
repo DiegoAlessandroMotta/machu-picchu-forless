@@ -1,9 +1,6 @@
 import { Bars3Icon } from '@/components/icons/Bars3Icon'
-import { CartIcon } from '@/components/icons/CartIcon'
 import { SearchIcon } from '@/components/icons/SearchIcon'
-import { UserIcon } from '@/components/icons/UserIcon'
 import { XMarkIcon } from '@/components/icons/XMarkIcon'
-import { Button } from '@headlessui/react'
 import { Link } from '@inertiajs/react'
 import { useRef, useState } from 'react'
 
@@ -80,15 +77,15 @@ export const Header = () => {
           </nav>
 
           <div className="hidden gap-4 lg:flex">
-            <Button>
+            <button className="flex">
               <SearchIcon />
-            </Button>
-            <Button>
+            </button>
+            {/* <Button>
               <UserIcon />
             </Button>
             <Button>
               <CartIcon />
-            </Button>
+            </Button> */}
           </div>
 
           <div

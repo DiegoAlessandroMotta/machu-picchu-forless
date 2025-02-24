@@ -2,36 +2,11 @@ import { PackageInformation } from '@/components/sections/booking/PackageInforma
 import { ReservationSummary } from '@/components/sections/booking/ReservationSummary'
 import { TravellersInformation } from '@/components/sections/booking/TravellersInformation'
 import { ExtraInformation } from '@/components/sections/tour/ExtraInformation'
+import { BookingContext } from '@/context/BookingContext'
 import MainLayout from '@/layouts/MainLayout'
-import { ReservationSummaryType } from '@/types'
 import { formatInputDateValue } from '@/utils/format-values'
 import { Head } from '@inertiajs/react'
-import { createContext, useRef, useState } from 'react'
-
-interface BookingInformationForm {
-  package: string
-  fullName: string
-  email: string
-  serviceType: string
-  country: string
-  startDate: Date
-  alternativeDate: Date
-  Travellers: {
-    firstName: string
-    lastName: string
-    gender: string
-    birhtdayDate: Date
-    docType: string
-    docNumber: string
-    foodRestrictions: string
-  }[]
-  aditionalDescription: string
-  temporalName: string
-}
-
-export const BookingContext = createContext<BookingInformationForm | undefined>(
-  undefined
-)
+import { useRef, useState } from 'react'
 
 const Booking = () => {
   const [summaryInformation, setSummaryInformation] =
