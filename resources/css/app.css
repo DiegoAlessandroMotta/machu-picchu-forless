@@ -9,7 +9,7 @@
     --secondary-color: #027a7c;
     --primary-color-light: #cfe1c7;
     --primary-color-saturated: #2c9600;
-    --dark: #272727;
+    /* --dark: #272727; */
   }
 
   input[type='number'].hide-arrows::-webkit-outer-spin-button,

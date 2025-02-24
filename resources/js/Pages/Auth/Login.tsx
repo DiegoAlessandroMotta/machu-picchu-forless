@@ -77,9 +77,7 @@ export default function Login({
               checked={data.remember}
               onChange={(e) => setData('remember', e.target.checked)}
             />
-            <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
-              Remember me
-            </span>
+            <span className="ms-2 text-sm text-gray-600">Remember me</span>
           </label>
         </div>
 
@@ -87,7 +85,7 @@ export default function Login({
           {canResetPassword && (
             <Link
               href={route('password.request')}
-              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Forgot your password?
             </Link>

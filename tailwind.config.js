@@ -7,26 +7,25 @@ export default {
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
-    './resources/js/**/*.tsx',
+    './resources/js/**/*.tsx'
   ],
 
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Open Sans Variable', ...defaultTheme.fontFamily.sans],
+        sans: ['Open Sans Variable', ...defaultTheme.fontFamily.sans]
       },
       maxWidth: {
-        layout: 'var(--layout-max-width, 1600px)',
+        layout: 'var(--layout-max-width, 1600px)'
       },
       colors: {
         primary: 'var(--primary-color, #63ab45)',
         secondary: 'var(--secondary-color, #027a7c)',
         'primary-light': 'var(--primary-color-light, #cfe1c7)',
-        'primary-saturated': 'var(--primary-color-saturated, #2c9600)',
-        dark: 'var(--dark, #272727)',
-      },
-    },
+        'primary-saturated': 'var(--primary-color-saturated, #2c9600)'
+      }
+    }
   },
 
-  plugins: [forms],
+  plugins: [forms]
 }
