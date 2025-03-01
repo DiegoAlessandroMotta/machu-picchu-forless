@@ -12,6 +12,10 @@
     /* --dark: #272727; */
   }
 
+  * {
+    scrollbar-width: thin;
+  }
+
   input[type='number'].hide-arrows::-webkit-outer-spin-button,
   input[type='number'].hide-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;
