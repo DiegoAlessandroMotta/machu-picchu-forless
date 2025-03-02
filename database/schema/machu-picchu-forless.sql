@@ -106,7 +106,7 @@ create table if not exists
 create table if not exists
   tour_images (
     id bigint auto_increment,
-    url text not null,
+    path text not null,
     tour_id int not null,
     foreign key (tour_id) references tours (id),
     primary key (id)
