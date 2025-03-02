@@ -282,13 +282,22 @@ create table if not exists
   );
 
 create table if not exists
+  payment_methods (
+    id int auto_increment,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
+    primary key (id)
+  );
+
+create table if not exists
   payments (
     id bigint auto_increment,
     amount decimal(10, 2) not null,
     payment_date timestamp not null,
-    payment_method varchar(255) not null,
+    payment_method_id int not null,
     payment_state_id int not null,
     reservation_id bigint not null,
+    foreign key (payment_method_id) references payment_methods (id),
     foreign key (payment_state_id) references payment_states (id),
     foreign key (reservation_id) references reservations (id),
     primary key (id)

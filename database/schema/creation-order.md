@@ -121,4 +121,5 @@
 #### Quinto grupo:
 
 - payment_states:1
-- payments:0 (payment_states, reservations)
+- payment_methods:1
+- payments:0 (payment_states, payment_methods, reservations)
