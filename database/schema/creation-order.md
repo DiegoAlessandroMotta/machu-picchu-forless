@@ -67,7 +67,7 @@
 
 - estados_reserva:1
 - packages:2
-- reservas:1 (estados_reserva, clientes, packages?, tours?, empleados?)
+- reservas:2 (estados_reserva, clientes, packages?, tours?, empleados?)
 - viajeros:0 (generos, tipos_documento, reservas)
 - tours_packages:0 (tours, packages)
 
@@ -81,3 +81,44 @@
 
 - estados_pago:1
 - pagos:0 (estados_pago, reservas)
+
+# v3
+
+#### Tablas independientes:
+
+- contacts:0
+
+#### Primer grupo:
+
+- tour_service_types:1
+- tour_categories:1
+- activity_levels:1
+- tours:4 (tour_service_types, tour_categories, activity_levels)
+- tour_days:0 (tours)
+- tour_images:0 (tours)
+
+#### Segundo grupo:
+
+- genders:1
+- document_types:1
+- countries:1
+- clients:1 (genders, document_types, countries)
+
+#### Tercer grupo:
+
+- reservation_states:1
+- packages:2 (activity_levels)
+- reservations:2 (reservation_states, clients, tours?, packages?)
+- travelers:0 (genders, document_types, reservations)
+- tour_packages:0 (tours, packages)
+
+#### Cuarto grupo:
+
+- user_roles:1
+- users:1
+- employee_accounts:0 (users, employees, user_roles)
+
+#### Quinto grupo:
+
+- payment_states:1
+- payments:0 (payment_states, reservations)

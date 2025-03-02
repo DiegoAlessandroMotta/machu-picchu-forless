@@ -4,28 +4,26 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * [Tablas]:
  * contacts
- * tipos_servicios_tour
- * categorias_tour
+ * tour_service_types
+ * tour_categories
+ * activity_levels
  * tours
  * tour_days
- * imagenes_tours
- * roles_empleado
- * personas
- * empleados
- * generos
- * tipos_documento
- * paises
- * clientes
- * estados_reserva
+ * tour_images
+ * genders
+ * document_types
+ * countries
+ * clients
+ * reservation_states
  * packages
- * reservas
- * viajeros
- * tours_packages
- * roles_usuario
+ * reservations
+ * travelers
+ * tour_packages
+ * user_roles
  * users
- * employees_accounts
- * estados_pago
- * pagos
+ * employee_accounts
+ * payment_states
+ * payments
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 use machupicchuforless_test;
 
@@ -49,35 +47,47 @@ create table if not exists
  */
 -- tipo_servicio enum('Group', 'Private') not null,
 create table if not exists
-  tipos_servicios_tour (
+  tour_service_types (
     id int auto_increment,
-    tipo varchar(255) not null,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
     primary key (id)
   );
 
 create table if not exists
-  categorias_tour (
+  tour_categories (
     id int auto_increment,
-    nombre varchar(45) not null,
-    descripcion varchar(511),
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
+    description varchar(255),
+    primary key (id)
+  );
+
+create table if not exists
+  activity_levels (
+    id int auto_increment,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
     primary key (id)
   );
 
 create table if not exists
   tours (
     id bigint auto_increment,
-    nombre varchar(100) not null,
-    dias int not null,
-    noches int not null,
-    precio decimal(10, 2) not null,
-    descripcion text,
-    banner_principal text not null,
-    maxima_altitud varchar(100) not null,
-    nivel_actividad varchar(80) not null,
-    categoria_id int not null,
-    tipo_servicio_id int not null,
-    foreign key (categoria_id) references categorias_tour (id),
-    foreign key (tipo_servicio_id) references tipos_servicios_tour (id),
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
+    price decimal(10, 2) not null,
+    days int not null,
+    nights int not null,
+    description varchar(1023),
+    main_banner varchar(255) not null,
+    max_altitude varchar(255) not null,
+    service_type_id int not null,
+    category_id int not null,
+    activity_level_id int not null,
+    foreign key (service_type_id) references tour_service_types (id),
+    foreign key (category_id) references tour_categories (id),
+    foreign key (activity_level_id) references activity_levels (id),
     primary key (id)
   );
 
@@ -86,7 +96,7 @@ create table if not exists
     id bigint auto_increment,
     title varchar(255) not null,
     day bigint not null default 1,
-    img varchar(1023) not null,
+    img varchar(255) not null,
     description varchar(1023) not null,
     tour_id int not null,
     foreign key (tour_id) references tours (id),
@@ -94,7 +104,7 @@ create table if not exists
   );
 
 create table if not exists
-  imagenes_tours (
+  tour_images (
     id bigint auto_increment,
     url text not null,
     tour_id int not null,
@@ -105,154 +115,132 @@ create table if not exists
 /*
  * Segundo grupo
  */
--- rol enum('Admin', 'Manager', 'Staff')
 create table if not exists
-  roles_empleado (
+  genders (
     id int auto_increment,
-    rol varchar(100) not null unique,
-    codigo varchar(5) not null unique,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
+    primary key (id)
+  );
+
+-- enum ('passport', 'dni-id', 'driver-license')
+create table if not exists
+  document_types (
+    id int auto_increment,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
     primary key (id)
   );
 
 create table if not exists
-  empleados (
+  countries (
+    id int auto_increment,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
+    phone_prefix varchar(255) not null unique,
+    active_status boolean default true,
+    primary key (id)
+  );
+
+create table if not exists
+  clients (
     id bigint auto_increment,
-    nombre varchar(80) not null,
-    apellido varchar(80) not null,
-    correo varchar(100) not null unique,
-    telefono varchar(20),
-    rol_id int not null,
-    foreign key (rol_id) references roles_empleado (id),
+    full_name varchar(255) not null,
+    email varchar(255) not null,
+    phone varchar(255),
+    birth_date date,
+    document_number varchar(255) not null,
+    gender_id int not null,
+    document_type_id int not null,
+    country_id int not null,
+    foreign key (gender_id) references genders (id),
+    foreign key (document_type_id) references document_types (id),
+    foreign key (country_id) references countries (id),
     primary key (id)
   );
 
 /*
  * Tercer grupo
  */
-create table if not exists
-  generos (
-    id int auto_increment,
-    nombre varchar(80) not null,
-    codigo varchar(5) not null unique,
-    primary key (id)
-  );
-
--- enum ('passport', 'dni-id', 'driver-license')
-create table if not exists
-  tipos_documento (
-    id int auto_increment,
-    tipo varchar(80) not null unique,
-    primary key (id)
-  );
-
-create table if not exists
-  paises (
-    id int auto_increment,
-    nombre varchar(255) not null,
-    codigo_pais char(2) not null unique,
-    prefijo_telefonico varchar(10) not null unique,
-    estado_activo boolean default true,
-    primary key (id)
-  );
-
-create table if not exists
-  clientes (
-    id bigint auto_increment,
-    fullname varchar(80) not null,
-    email varchar(255) not null,
-    telefono varchar(20),
-    fecha_nacimiento date,
-    numero_documento varchar(50) not null,
-    tipo_documento_id int not null,
-    pais_id int not null,
-    genero_id int not null,
-    alergico boolean not null,
-    foreign key (tipo_documento_id) references tipos_documento (id),
-    foreign key (pais_id) references paises (id),
-    foreign key (genero_id) references generos (id),
-    primary key (id)
-  );
-
-/*
- * Cuarto grupo
- */
 -- estado enum('pendiente', 'confirmada', 'cancelada') not null,
 create table if not exists
-  estados_reserva (
+  reservation_states (
     id int auto_increment,
-    estado varchar(255),
-    codigo varchar(5) not null unique,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
     primary key (id)
   );
 
 create table if not exists
   packages (
     id bigint auto_increment,
-    nombre varchar(100) not null,
-    dias int not null,
-    noches int not null,
-    precio decimal(10, 2) not null,
-    descripcion text,
-    banner_principal text not null,
-    nivel_actividad varchar(80) not null,
-    tipo_servicio_id int not null,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
+    days int not null,
+    nights int not null,
+    price decimal(10, 2) not null,
+    description varchar(1023),
+    main_banner varchar(255) not null,
+    service_type_id int not null,
+    activity_level_id int not null,
+    foreign key (activity_level_id) references activity_levels (id),
     primary key (id)
   );
 
 create table if not exists
-  reservas (
+  reservations (
     id bigint auto_increment,
-    fecha_inicio date not null,
-    fecha_fin date not null,
-    informacion_adicional text not null,
-    estado_reserva_id int not null,
-    cliente_id bigint not null,
-    empleado_id bigint,
+    start_date date not null,
+    alternative_date date not null,
+    additional_info varchar(1023) not null,
+    heard_about_us varchar(1023) not null,
+    reservation_state_id int not null,
+    client_id bigint not null,
     tour_id bigint,
     package_id bigint,
-    foreign key (estado_reserva_id) references estados_reserva (id),
-    foreign key (cliente_id) references clientes (id),
-    foreign key (empleado_id) references empleados (id),
+    foreign key (reservation_state_id) references reservation_states (id),
+    foreign key (client_id) references clients (id),
     foreign key (tour_id) references tours (id),
     foreign key (package_id) references packages (id),
     primary key (id)
   );
 
 create table if not exists
-  viajeros (
+  travelers (
     id bigint auto_increment,
-    nombres varchar(80) not null,
-    apellidos varchar(80) not null,
-    fecha_nacimiento date not null,
-    numero_documento varchar(50) not null,
-    restricciones_alimenticias_alergias boolean not null,
-    genero_id int not null,
-    tipo_documento_id int not null,
-    reserva_id bigint not null,
-    foreign key (genero_id) references generos (id),
-    foreign key (tipo_documento_id) references tipos_documento (id),
-    foreign key (reserva_id) references reservas (id),
+    first_name varchar(255) not null,
+    last_name varchar(255) not null,
+    birth_date date not null,
+    document_number varchar(255) not null,
+    allergic boolean not null,
+    gender_id int not null,
+    document_type_id int not null,
+    reservation_id bigint not null,
+    foreign key (gender_id) references genders (id),
+    foreign key (document_type_id) references document_types (id),
+    foreign key (reservation_id) references reservations (id),
     primary key (id)
   );
 
 create table if not exists
-  tours_packages (
+  tour_packages (
+    id bigint auto_increment,
     tour_id bigint not null,
     package_id bigint not null,
     foreign key (tour_id) references tours (id),
     foreign key (package_id) references packages (id),
-    primary key (tour_id, package_id)
+    primary key (id)
   );
 
 /*
- * Quinto grupo
+ * Cuarto grupo
  */
 -- rol enum('Admin', 'Empleado', 'Cliente') not null,
 create table if not exists
-  roles_usuario (
+  user_roles (
     id int auto_increment,
-    rol varchar(100) not null,
-    codigo varchar(5) not null unique,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
     primary key (id)
   );
 
@@ -263,44 +251,46 @@ create table if not exists
     email varchar(255) not null unique,
     email_verified_at timestamp,
     password varchar(255) not null,
-    remember_token varchar(100),
+    remember_token varchar(255),
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp,
     primary key (id)
   );
 
 create table if not exists
-  employees_accounts (
-    user_id bigint,
-    empleado_id bigint not null unique,
-    rol_usuario_id int not null,
+  employee_accounts (
+    id bigint auto_increment,
+    phone varchar(255),
+    user_id bigint not null unique,
+    employee_id bigint not null unique,
+    user_role_id int not null,
     foreign key (user_id) references users (id),
-    foreign key (empleado_id) references empleados (id),
-    foreign key (rol_usuario_id) references roles_usuario (id),
-    primary key (user_id)
+    foreign key (employee_id) references employees (id),
+    foreign key (user_role_id) references user_roles (id),
+    primary key (id)
   );
 
 /*
- * Sexto grupo
+ * Quinto grupo
  */
 -- estado enum('pendiente', 'pagado', 'fallido') not null,
 create table if not exists
-  estados_pago (
+  payment_states (
     id int auto_increment,
-    estado varchar(255),
-    codigo varchar(5) not null unique,
+    code varchar(255) not null unique,
+    name varchar(255) not null unique,
     primary key (id)
   );
 
 create table if not exists
-  pagos (
+  payments (
     id bigint auto_increment,
-    monto decimal(10, 2) not null,
-    fecha_pago timestamp not null,
-    metodo_pago varchar(50) not null,
-    estado_pago_id int not null,
-    reserva_id bigint not null,
-    foreign key (estado_pago_id) references estados_pago (id),
-    foreign key (reserva_id) references reservas (id),
+    amount decimal(10, 2) not null,
+    payment_date timestamp not null,
+    payment_method varchar(255) not null,
+    payment_state_id int not null,
+    reservation_id bigint not null,
+    foreign key (payment_state_id) references payment_states (id),
+    foreign key (reservation_id) references reservations (id),
     primary key (id)
   );
