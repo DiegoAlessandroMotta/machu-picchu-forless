@@ -11,20 +11,17 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('tours', function (Blueprint $table) {
+    Schema::create('packages', function (Blueprint $table) {
       $table->id();
       $table->string("code")->unique();
       $table->string("name")->unique();
-      $table->decimal('price', total: 8, places: 2);
       $table->integer("days");
       $table->integer("nights");
+      $table->decimal('price', total: 8, places: 2);
       $table->string("description", 1023)->nullable();
       $table->string("main_banner");
-      $table->string("max_altitude");
       $table->foreignId('service_type_id')
         ->constrained(table: 'tour_service_types');
-      $table->foreignId('category_id')
-        ->constrained(table: 'tour_categories');
       $table->foreignId('activity_level_id')
         ->constrained(table: 'activity_levels');
       $table->timestamps();
@@ -36,6 +33,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('tours');
+    Schema::dropIfExists('packages');
   }
 };

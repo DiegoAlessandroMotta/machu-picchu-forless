@@ -148,13 +148,13 @@ create table if not exists
     full_name varchar(255) not null,
     email varchar(255) not null,
     phone varchar(255),
-    birth_date date,
-    document_number varchar(255) not null,
-    gender_id int not null,
-    document_type_id int not null,
+    -- birth_date date,
+    -- document_number varchar(255) not null,
+    -- gender_id int not null,
+    -- document_type_id int not null,
     country_id int not null,
     foreign key (gender_id) references genders (id),
-    foreign key (document_type_id) references document_types (id),
+    -- foreign key (document_type_id) references document_types (id),
     foreign key (country_id) references countries (id),
     primary key (id)
   );
@@ -183,6 +183,7 @@ create table if not exists
     main_banner varchar(255) not null,
     service_type_id int not null,
     activity_level_id int not null,
+    foreign key (service_type_id) references tour_service_types (id),
     foreign key (activity_level_id) references activity_levels (id),
     primary key (id)
   );
@@ -192,8 +193,8 @@ create table if not exists
     id bigint auto_increment,
     start_date date not null,
     alternative_date date not null,
-    additional_info varchar(1023) not null,
-    heard_about_us varchar(1023) not null,
+    additional_info varchar(1023),
+    heard_about_us varchar(1023),
     reservation_state_id int not null,
     client_id bigint not null,
     tour_id bigint,
