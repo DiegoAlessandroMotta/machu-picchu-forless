@@ -116,7 +116,7 @@
 
 - user_roles:1
 - users:1
-- employee_accounts:0 (users, employees, user_roles)
+- employee_accounts:0 (users, user_roles)
 
 #### Quinto grupo:
 

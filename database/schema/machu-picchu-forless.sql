@@ -98,7 +98,7 @@ create table if not exists
     day bigint not null default 1,
     img varchar(255) not null,
     description varchar(1023) not null,
-    tour_id int not null,
+    tour_id bigint not null,
     foreign key (tour_id) references tours (id),
     primary key (id)
   );
@@ -107,7 +107,7 @@ create table if not exists
   tour_images (
     id bigint auto_increment,
     path text not null,
-    tour_id int not null,
+    tour_id bigint not null,
     foreign key (tour_id) references tours (id),
     primary key (id)
   );
@@ -153,7 +153,7 @@ create table if not exists
     -- gender_id int not null,
     -- document_type_id int not null,
     country_id int not null,
-    foreign key (gender_id) references genders (id),
+    -- foreign key (gender_id) references genders (id),
     -- foreign key (document_type_id) references document_types (id),
     foreign key (country_id) references countries (id),
     primary key (id)
@@ -263,10 +263,8 @@ create table if not exists
     id bigint auto_increment,
     phone varchar(255),
     user_id bigint not null unique,
-    employee_id bigint not null unique,
     user_role_id int not null,
     foreign key (user_id) references users (id),
-    foreign key (employee_id) references employees (id),
     foreign key (user_role_id) references user_roles (id),
     primary key (id)
   );
