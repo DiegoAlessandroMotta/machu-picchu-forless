@@ -23,6 +23,7 @@
  * tours_packages
  * roles_usuario
  * users
+ * employees_accounts
  * estados_pago
  * pagos
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

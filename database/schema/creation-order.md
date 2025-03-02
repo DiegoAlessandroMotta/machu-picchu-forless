@@ -74,7 +74,8 @@
 #### Quinto grupo:
 
 - roles_usuario:1
-- users:0 (empleados, roles_usuario?)
+- users:1
+- employees_accounts:0 (users, empleados, roles_usuario)
 
 #### Sexto grupo:
 
