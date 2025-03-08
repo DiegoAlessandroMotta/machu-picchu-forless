@@ -3,26 +3,26 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --layout-max-width: 1600px;
-    --primary-color: #63ab45;
-    --secondary-color: #027a7c;
-    --primary-color-light: #cfe1c7;
-    --primary-color-saturated: #2c9600;
-    --dark: #272727;
-  }
+	:root {
+		--layout-max-width: 1600px;
+		--primary-color: #63ab45;
+		--secondary-color: #027a7c;
+		--primary-color-light: #cfe1c7;
+		--primary-color-saturated: #2c9600;
+		--dark: #272727;
+	}
 
-  * {
-    scrollbar-width: thin;
-  }
+	* {
+		scrollbar-width: thin;
+	}
 
-  input[type='number'].hide-arrows::-webkit-outer-spin-button,
-  input[type='number'].hide-arrows::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  input[type='number'].hide-arrows {
-    appearance: textfield;
-    -moz-appearance: textfield;
-  }
+	input[type='number'].hide-arrows::-webkit-outer-spin-button,
+	input[type='number'].hide-arrows::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	input[type='number'].hide-arrows {
+		appearance: textfield;
+		-moz-appearance: textfield;
+	}
 }

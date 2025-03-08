@@ -1,6 +1,5 @@
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout'
+import AuthenticatedLayout from '@/layouts/DashboardLayout'
 import { Head } from '@inertiajs/react'
-import { Button, Checkbox } from '@mui/material'
 
 export default function Dashboard() {
   return (
@@ -13,11 +12,10 @@ export default function Dashboard() {
             <h1 className="text-3xl font-semibold">Overview</h1>
           </header>
           <div>
-            <Button variant="contained">This is a button</Button>
+            <button>This is a button</button>
           </div>
         </div>
       </div>
-      <Checkbox defaultChecked />
     </AuthenticatedLayout>
   )
 }

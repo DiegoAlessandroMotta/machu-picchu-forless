@@ -1,5 +1,6 @@
 import forms from '@tailwindcss/forms'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import flowbite from 'flowbite-react/tailwind'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,13 +8,18 @@ export default {
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
-    './resources/js/**/*.tsx'
+    './resources/js/**/*.tsx',
+    flowbite.content()
   ],
 
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Open Sans Variable', ...defaultTheme.fontFamily.sans]
+        sans: [
+          'Inter Variable',
+          'Open Sans Variable',
+          ...defaultTheme.fontFamily.sans
+        ]
       },
       maxWidth: {
         layout: 'var(--layout-max-width, 1600px)'
@@ -28,5 +34,5 @@ export default {
     }
   },
 
-  plugins: [forms]
+  plugins: [forms, flowbite.plugin()]
 }

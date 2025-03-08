@@ -7,6 +7,7 @@ interface Props extends PropsWithChildren {
   textEnd?: boolean
   fullWidth?: boolean
   verticalCentered?: boolean
+  error?: string
 }
 
 export const Label = ({
@@ -17,6 +18,7 @@ export const Label = ({
   textEnd,
   fullWidth,
   verticalCentered,
+  error
 }: Props) => {
   return (
     <label
@@ -25,6 +27,9 @@ export const Label = ({
       {text && !textEnd && <span className={className}>{text}</span>}
       {children}
       {text && textEnd && <span className={className}>{text}</span>}
+      {error !== undefined && (
+        <span className="text-sm text-red-500">{error}</span>
+      )}
     </label>
   )
 }

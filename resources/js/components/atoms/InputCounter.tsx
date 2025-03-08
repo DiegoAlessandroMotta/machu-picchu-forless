@@ -1,41 +1,39 @@
+// import { useCounter } from '@/hooks/useCounter'
 import { MinusIcon } from '@/components/icons/MinusIcon'
 import { PlusIcon } from '@/components/icons/PlusIcon'
-import { useCallback, useMemo, useState } from 'react'
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props {
   min?: number
   max?: number
-  defaultValue?: number
+  // defaultValue?: number
+  counter: number
+  decrementCounter: () => void
+  incrementCounter: () => void
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  fullWidth?: boolean
 }
 
 export const InputCounter = ({
-  min,
-  max,
-  type,
-  defaultValue,
-  ...rest
+  min = 0,
+  max = 100,
+  // defaultValue,
+  counter,
+  decrementCounter,
+  incrementCounter,
+  handleChange,
+  fullWidth
+  // ...rest
 }: Props) => {
-  const [counter, setCounter] = useState<number>(defaultValue ?? min ?? 1)
-  const minValue = useMemo(() => min ?? 1, [])
-  const maxValue = useMemo(() => max ?? 100, [])
-
-  const decrementCounter = useCallback(() => {
-    setCounter((prev) => Math.max(prev - 1, minValue))
-  }, [counter])
-
-  const incrementCounter = useCallback(() => {
-    setCounter((prev) => Math.min(prev + 1, maxValue))
-  }, [counter])
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value)
-    if (!isNaN(newValue) && newValue >= minValue && newValue <= maxValue) {
-      setCounter(newValue)
-    }
-  }, [])
+  // const { counter, decrementCounter, incrementCounter, handleChange } =
+  //   useCounter({ min, max, defaultValue })
 
   return (
-    <div className="flex items-center gap-2">
+    <div
+      className={`flex items-center gap-2 ${fullWidth ? 'w-full' : 'w-fit'}`}
+      onClick={(event) => {
+        event.preventDefault()
+      }}
+    >
       <button
         className="rounded-full border border-gray-300 p-1"
         onClick={decrementCounter}
@@ -47,11 +45,11 @@ export const InputCounter = ({
       <input
         type="number"
         value={counter}
-        min={minValue}
-        max={maxValue}
+        min={min}
+        max={max}
         onChange={handleChange}
         className="hide-arrows rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center text-gray-900 outline-none focus:border-blue-200 focus:ring-2 focus:ring-blue-200"
-        {...rest}
+        // {...rest}
       />
       <button
         className="rounded-full border border-gray-300 p-1"

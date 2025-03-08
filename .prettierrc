@@ -2,8 +2,8 @@
   "singleQuote": true,
   "semi": false,
   "trailingComma": "none",
+  "useTabs": true,
   "plugins": [
-    "prettier-plugin-organize-imports",
     "prettier-plugin-tailwindcss"
   ]
 }
