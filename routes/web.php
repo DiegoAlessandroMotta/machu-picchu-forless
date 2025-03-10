@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Contact;
+use App\Http\Controllers\ToursController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -11,15 +10,17 @@ Route::get('/', function () {
   return Inertia::render('Home');
 });
 
-Route::get('/tour/{id}', function (string $id) {
+Route::get('/tour/{id}', function (string $identifier) {
+  $tour = new ToursController()->show($identifier);
+
   return Inertia::render('Tour', [
-    'id' => $id
+    'tour' => $tour
   ]);
 });
 
 Route::get('/booking', function () {
   return Inertia::render('Booking');
-});
+})->name('booking');
 
 Route::get('/paypal-test', function () {
   return Inertia::render('PaypalTest');

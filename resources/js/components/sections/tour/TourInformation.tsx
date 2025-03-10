@@ -22,7 +22,7 @@ interface Props {
 	title: string
 	price: number
 	days: number
-	description: string
+	description?: string
 }
 
 interface PropsTheRevenge {
@@ -89,7 +89,9 @@ export const TourInformation = ({
 					<p className="text-lg font-semibold">
 						From <span className="text-primary">${price}</span> / {days} Days
 					</p>
-					<p className="mt-2 text-pretty font-light">{description}</p>
+					{description !== undefined && (
+						<p className="mt-2 text-pretty font-light">{description}</p>
+					)}
 				</article>
 				{children && <aside className="flex justify-center">{children}</aside>}
 			</div>

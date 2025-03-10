@@ -52,7 +52,6 @@ class DashboardController extends Controller
     return (bool)preg_match($patron, $str);
   }
 
-
   public function store_tour(Request $request)
   {
     $validator = Validator::make($request->all(), [

@@ -12,7 +12,6 @@ import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
 import { useCounter } from '@/hooks/useCounter'
 import DashboardLayout from '@/layouts/DashboardLayout'
-import { PageProps } from '@/types'
 import { formatUrlCode } from '@/utils/format-values'
 import { Link, useForm } from '@inertiajs/react'
 import React, { useEffect } from 'react'
@@ -240,7 +239,7 @@ export default function CreateTour({
 										required
 									/>
 								</Label>
-								<div className="flex gap-4 flex-wrap">
+								<div className="flex flex-wrap gap-4">
 									<Label
 										text="Days *"
 										className="text-sm font-semibold"

@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { cn } from '@/utils/utils'
+import React, { useMemo, useState } from 'react'
 
 interface Option extends React.OptionHTMLAttributes<HTMLOptionElement> {
 	label: string
@@ -94,3 +95,44 @@ export const InputSelector = ({
 		</select>
 	)
 }
+
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+	options: { value: string; label: string }[]
+	value?: string
+	onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
+	defaultValue?: string
+	isControlled?: boolean
+	className?: string
+}
+
+const SelectInput = ({
+	options,
+	value,
+	onChange,
+	defaultValue,
+	isControlled = false,
+	className,
+	...props
+}: SelectProps) => {
+	return (
+		<select
+			className={cn(
+				'block rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-current outline-none',
+				'focus:border-blue-200 focus:ring-2 focus:ring-blue-200',
+				className
+			)}
+			value={isControlled ? value : undefined}
+			onChange={onChange}
+			defaultValue={!isControlled ? defaultValue : undefined}
+			{...props}
+		>
+			{options.map((option) => (
+				<option key={option.value} value={option.value}>
+					{option.label}
+				</option>
+			))}
+		</select>
+	)
+}
+
+export default SelectInput

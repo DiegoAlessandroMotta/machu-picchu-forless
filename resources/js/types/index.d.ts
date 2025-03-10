@@ -1,11 +1,11 @@
-export interface User {
+interface User {
   id: number
   name: string
   email: string
   email_verified_at?: string
 }
 
-export type PageProps<
+type PageProps<
   T extends Record<string, unknown> = Record<string, unknown>
 > = T & {
   auth: {
@@ -13,7 +13,7 @@ export type PageProps<
   }
 }
 
-export interface ReservationSummaryType {
+interface ReservationSummaryType {
   pricePerPerson?: number
   tour?: string
   typeService?: string

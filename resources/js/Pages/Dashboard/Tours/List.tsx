@@ -8,7 +8,6 @@ import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
 import { SearchInput } from '@/dashboard/components/SearchInput'
 import AuthenticatedLayout from '@/layouts/DashboardLayout'
-import { PageProps } from '@/types'
 import { Link } from '@inertiajs/react'
 
 interface Tour {

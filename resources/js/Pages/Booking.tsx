@@ -77,7 +77,7 @@ const Booking = () => {
                 ref={formRef}
                 onSubmit={handleSubmitForm}
               >
-                <PackageInformation refreshSummary={refreshSummary} />
+                {/* <PackageInformation refreshSummary={refreshSummary} /> */}
                 <TravellersInformation
                   setNumberOfTravellers={setNumberOfTravellers}
                 />

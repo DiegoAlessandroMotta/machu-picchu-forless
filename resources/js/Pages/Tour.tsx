@@ -2,72 +2,61 @@ import { Banner } from '@/components/sections/tour/Banner'
 import { ReservationCard } from '@/components/sections/tour/ReservationCard'
 import { TourInformation } from '@/components/sections/tour/TourInformation'
 import MainLayout from '@/layouts/MainLayout'
-import toursData from '@/mocks/tours.json'
 import { Head } from '@inertiajs/react'
-import { useEffect, useState } from 'react'
+
+interface Tour {
+	id: number
+	code: string
+	name: string
+	price: string
+	days: number
+	nights: number
+	description: string | null
+	main_banner: string
+	max_altitude: string
+	service_type_id: number
+	category_id: number
+	activity_level_id: number
+	service_type: string
+	category: string
+	activity_level: string
+}
 
 interface PageProps {
-	id: string
+	tour: Tour
 }
 
-interface TourType {
-	id: string
-	title: string
-	days: number
-	price: number
-	description: string
-	bgImgUrl: string
-	duration: number
-	typeOfService: string
-	maxAltitude: string
-	activityLevel: string
-}
-
-const Tour = ({ id }: PageProps) => {
-	const [tourData, setTourData] = useState<TourType>()
-
-	useEffect(() => {
-		const currentTour = toursData.find((tour) => {
-			return tour.id === id
-		})
-
-		if (currentTour !== undefined) {
-			setTourData(currentTour)
-		}
-	}, [])
+const Tour = ({ tour }: PageProps) => {
+	console.log(tour)
 
 	return (
 		<>
 			<Head title="Machu Picchu Forless" />
 			<MainLayout>
-				{tourData !== undefined && (
+				{tour !== undefined && (
 					<>
 						<Banner
-							title={tourData.title}
-							bgImgUrl={tourData.bgImgUrl}
-							price={tourData.price}
-							days={tourData.days}
+							title={tour.name}
+							bgImgUrl={tour.main_banner}
+							price={Number(tour.price)}
+							days={tour.days}
 						/>
 						<TourInformation
-							typeOfService={tourData.typeOfService}
-							duration={tourData.duration}
-							maxAltitude={tourData.maxAltitude}
-							activityLevel={tourData.activityLevel}
-							title={tourData.title}
-							price={tourData.price}
-							days={tourData.days}
-							description={tourData.description}
+							typeOfService={tour.service_type}
+							duration={tour.days}
+							maxAltitude={tour.max_altitude}
+							activityLevel={tour.activity_level}
+							title={tour.name}
+							price={Number(tour.price)}
+							days={tour.days}
+							description={tour.description ?? undefined}
 						>
-							<ReservationCard packageId={id} />
+							<ReservationCard code={tour.code} />
 						</TourInformation>
 					</>
 				)}
 
-				{tourData === undefined && <p>Tour no encontrado :P</p>}
-
-				{/* <div className="text-center text-lg font-semibold">
-          This is the id: <span className="font-bold">{id}</span>
-        </div> */}
+				{tour === undefined && <p>Tour no encontrado :P</p>}
 			</MainLayout>
 		</>
 	)
