@@ -23,15 +23,15 @@ class ContactController extends Controller
    */
   public function store(StoreContactRequest $request)
   {
-    $contactDto = $request->validated();
+    $validatedContact = $request->validated();
 
     $contact = new Contact;
 
-    $contact->client_name = $contactDto["client_name"];
-    $contact->client_phone = $contactDto["client_phone"];
-    $contact->client_email = $contactDto["client_email"];
-    $contact->subject = $contactDto["subject"];
-    $contact->message = $contactDto["message"];
+    $contact->client_name = $validatedContact["client_name"];
+    $contact->client_phone = $validatedContact["client_phone"];
+    $contact->client_email = $validatedContact["client_email"];
+    $contact->subject = $validatedContact["subject"];
+    $contact->message = $validatedContact["message"];
 
     $contact->save();
 

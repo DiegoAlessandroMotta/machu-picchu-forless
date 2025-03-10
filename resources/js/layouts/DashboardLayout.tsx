@@ -2,7 +2,7 @@ import { PageProps } from '@/types'
 import { usePage } from '@inertiajs/react'
 import BaseLayout from '@/layouts/BaseLayout'
 import { LayoutProps } from '@/types/export'
-import { Header } from '@/dashboard/components/Header'
+import { TopBar } from '@/dashboard/components/TopBar'
 import { Sidebar } from '@/dashboard/components/Sidebar'
 import { SidebarProvider } from '@/dashboard/components/SidebarContext'
 
@@ -25,10 +25,8 @@ export default function DashboardLayout({
 			<SidebarProvider>
 				<div className="flex h-dvh flex-nowrap overflow-hidden">
 					<Sidebar />
-
 					<div className="flex-grow overflow-y-auto overflow-x-hidden bg-white text-zinc-900">
-						<Header user={user} />
-
+						<TopBar user={user} />
 						<main>{children}</main>
 					</div>
 				</div>

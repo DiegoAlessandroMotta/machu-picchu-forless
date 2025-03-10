@@ -21,3 +21,9 @@ export const formatInputDateValue = (dateString: string) => {
 
   return localDateString
 }
+
+export const formatUrlCode = (value: string) => {
+  return value.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}

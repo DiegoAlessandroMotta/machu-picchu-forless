@@ -12,13 +12,13 @@ export const Sidebar = () => {
 
 	return (
 		<nav
-			className={`h-dvh w-72 overflow-hidden border-gray-100 bg-[#121621] text-white transition-transform duration-300 ${isMobile && !open ? '-translate-x-full' : 'translate-x-0'} ${isMobile ? 'absolute z-10' : ''}`}
+			className={`h-dvh min-w-72 w-72 overflow-hidden border-gray-100 bg-[#121621] text-white transition-transform duration-300 ${isMobile && !open ? '-translate-x-full' : 'translate-x-0'} ${isMobile ? 'absolute z-10' : ''}`}
 		>
 			<div className="sticky top-0 mx-auto">
 				<div className="flex flex-wrap items-center justify-center gap-2 px-4 pb-2 pt-4 text-white">
 					<div className="flex w-full">
 						<Link href={route('dashboard')} className="contents" prefetch>
-							<AppLogo.base
+							<AppLogo.Base
 								className="h-14"
 								birdColor="#63AB45"
 								forlessColor="#FFFFFF"
@@ -66,14 +66,6 @@ export const Sidebar = () => {
 								active={route().current('dashboard.tours.create')}
 							>
 								Create tours
-							</NavLink>
-						</li>
-						<li className="contents">
-							<NavLink
-								href={route('dashboard.test')}
-								active={route().current('dashboard.test')}
-							>
-								Test
 							</NavLink>
 						</li>
 					</ul>

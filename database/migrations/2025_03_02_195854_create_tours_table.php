@@ -18,7 +18,7 @@ return new class extends Migration
       $table->decimal('price', total: 8, places: 2);
       $table->integer("days");
       $table->integer("nights");
-      $table->string("description", 1023)->nullable();
+      $table->text("description")->nullable();
       $table->string("main_banner");
       $table->string("max_altitude");
       $table->foreignId('service_type_id')

@@ -56,7 +56,7 @@ export const Header = () => {
 			<div className="relative px-4 md:px-8">
 				<div className="mx-auto flex max-w-screen-xl items-center justify-between py-2">
 					<Link href="/" prefetch>
-						<AppLogo.colored className="h-12" />
+						<AppLogo.Colored className="h-12" />
 					</Link>
 
 					<nav className="absolute left-1/2 hidden -translate-x-1/2 transform lg:block">
