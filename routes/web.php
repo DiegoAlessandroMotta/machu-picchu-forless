@@ -30,29 +30,6 @@ Route::get('/paypal-test', function () {
   return Inertia::render('PaypalTest');
 });
 
-Route::prefix('/test-page')->group(function () {
-  Route::get('/', fn() => Inertia::render('TestPage'))->name('test-page');
-
-  Route::post(
-    '/',
-    function (Request $request) {
-      $validator = Validator::make($request->all(), [
-        'username' => ['required', 'max:12'],
-        'people.*.name' => ['required', 'max:8'],
-        'people.*.age' => ['required', 'numeric', 'min:18', 'max:100'],
-      ]);
-
-      if ($validator->fails()) {
-        return to_route('test-page')
-          ->withErrors($validator)
-          ->withInput();
-      }
-
-      return to_route('test-page');
-    }
-  )->name('test-page');
-});
-
 // Route::post('/api/checkout', [PayPalController::class, 'create']);
 
 // Route::get('/download-file', function () {
