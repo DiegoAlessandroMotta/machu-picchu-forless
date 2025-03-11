@@ -1,5 +1,5 @@
 import { Input } from '@/components/atoms/Input'
-import { SelectInput } from '@/components/atoms/InputSelector'
+import { SelectInput } from '@/components/atoms/SelectInput'
 import { Label } from '@/components/atoms/Label'
 import { datePickerTheme } from '@/consts'
 import { Datepicker } from 'flowbite-react'
@@ -33,7 +33,7 @@ export const PackageInformation = ({
 	data
 }: Props) => {
 	const tourOptions = useMemo(() => {
-		return tours.map((tour) => ({ value: String(tour.id), label: tour.name }))
+		return tours.map((tour) => ({ value: tour.code, label: tour.name }))
 	}, [tours])
 
 	const countryOptions = useMemo(() => {
@@ -52,11 +52,12 @@ export const PackageInformation = ({
 			<section className="flex flex-col gap-4 rounded-lg bg-white px-6 py-8 shadow-md md:px-12">
 				<Label text="Packages" className="font-semibold" fullWidth>
 					<SelectInput
-						value={data.tour_id}
+						value={data.tour_code}
 						options={tourOptions}
 						onChange={(e) => {
 							setTour(e.target.value)
 						}}
+						isControlled
 						required
 					/>
 				</Label>
@@ -80,6 +81,7 @@ export const PackageInformation = ({
 							onChange={(e) => {
 								setCountry(e.target.value)
 							}}
+							isControlled
 							required
 						/>
 					</Label>

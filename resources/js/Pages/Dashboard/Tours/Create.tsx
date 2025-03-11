@@ -1,9 +1,6 @@
 import { Input } from '@/components/atoms/Input'
 import { InputCounter } from '@/components/atoms/InputCounter'
-import {
-	InputSelector,
-	useInputSelector
-} from '@/components/atoms/InputSelector'
+import { SelectInput } from '@/components/atoms/SelectInput'
 import { Label } from '@/components/atoms/Label'
 import { ArrowLeftIcon } from '@/components/icons/ArrowLeftIcon'
 import { Button } from '@/dashboard/components/Button'
@@ -18,15 +15,14 @@ import { Link, useForm } from '@inertiajs/react'
 import React, { useEffect } from 'react'
 
 interface Option {
-	id: number
-	code: string
+	id: string
 	name: string
 }
 
 interface ToursPageProps extends PageProps {
-	serviceTypeOptions: Option[]
-	categoryOptions: Option[]
-	activityLevelOptions: Option[]
+	serviceTypes: Option[]
+	categories: Option[]
+	activityLevels: Option[]
 }
 
 const FormRow = React.memo(({ children }: React.PropsWithChildren) => {
@@ -35,9 +31,9 @@ const FormRow = React.memo(({ children }: React.PropsWithChildren) => {
 FormRow.displayName = 'FormRow'
 
 const CreateTour = ({
-	serviceTypeOptions,
-	categoryOptions,
-	activityLevelOptions
+	serviceTypes,
+	categories,
+	activityLevels
 }: ToursPageProps) => {
 	const { data, setData, post, processing, errors, reset, clearErrors } =
 		useForm({
@@ -57,6 +53,9 @@ const CreateTour = ({
 	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
+		// eslint-disable-next-line no-console
+		console.log(data)
+
 		post(route('dashboard.tours.create'), {
 			preserveScroll: true,
 			onSuccess: () => {
@@ -69,46 +68,28 @@ const CreateTour = ({
 
 	useEffect(() => {
 		setData('days', daysCounter.counter)
-	}, [daysCounter.counter, setData])
+	}, [daysCounter.counter])
 
 	const nightsCounter = useCounter({ min: 0, max: 30, defaultValue: 1 })
 
 	useEffect(() => {
 		setData('nights', nightsCounter.counter)
-	}, [nightsCounter.counter, setData])
+	}, [nightsCounter.counter])
 
-	const serviceTypeSelector = useInputSelector({
-		options: serviceTypeOptions.map((option) => ({
-			label: option.name,
-			value: option.id
-		}))
-	})
+	const serviceTypeOptions = serviceTypes.map((option) => ({
+		label: option.name,
+		value: option.id
+	}))
 
-	useEffect(() => {
-		setData('service_type_id', serviceTypeSelector.selectedValue)
-	}, [serviceTypeSelector.selectedValue, setData])
+	const categoryOptions = categories.map((option) => ({
+		label: option.name,
+		value: option.id
+	}))
 
-	const categorySelector = useInputSelector({
-		options: categoryOptions.map((option) => ({
-			label: option.name,
-			value: option.id
-		}))
-	})
-
-	useEffect(() => {
-		setData('category_id', categorySelector.selectedValue)
-	}, [categorySelector.selectedValue, setData])
-
-	const activityLevelSelector = useInputSelector({
-		options: activityLevelOptions.map((option) => ({
-			label: option.name,
-			value: option.id
-		}))
-	})
-
-	useEffect(() => {
-		setData('activity_level_id', activityLevelSelector.selectedValue)
-	}, [activityLevelSelector.selectedValue, setData])
+	const activityLevelOptions = activityLevels.map((option) => ({
+		label: option.name,
+		value: option.id
+	}))
 
 	return (
 		<>
@@ -198,12 +179,13 @@ const CreateTour = ({
 									error={errors.service_type_id}
 									fullWidth
 								>
-									<InputSelector
-										selectedValue={serviceTypeSelector.selectedValue}
-										sortedOptions={serviceTypeSelector.sortedOptions}
-										setSelectedValue={serviceTypeSelector.setSelectedValue}
-										defaultOption={serviceTypeSelector.defaultOption}
-										showDefaultDisabledOption
+									<SelectInput
+										value={data.service_type_id}
+										options={serviceTypeOptions}
+										onChange={(e) => {
+											setData('service_type_id', e.target.value)
+										}}
+										isControlled
 										required
 									/>
 								</Label>
@@ -213,12 +195,13 @@ const CreateTour = ({
 									error={errors.category_id}
 									fullWidth
 								>
-									<InputSelector
-										selectedValue={categorySelector.selectedValue}
-										sortedOptions={categorySelector.sortedOptions}
-										setSelectedValue={categorySelector.setSelectedValue}
-										defaultOption={categorySelector.defaultOption}
-										showDefaultDisabledOption
+									<SelectInput
+										value={data.category_id}
+										options={categoryOptions}
+										onChange={(e) => {
+											setData('category_id', e.target.value)
+										}}
+										isControlled
 										required
 									/>
 								</Label>
@@ -230,12 +213,13 @@ const CreateTour = ({
 									error={errors.activity_level_id}
 									fullWidth
 								>
-									<InputSelector
-										selectedValue={activityLevelSelector.selectedValue}
-										sortedOptions={activityLevelSelector.sortedOptions}
-										setSelectedValue={activityLevelSelector.setSelectedValue}
-										defaultOption={activityLevelSelector.defaultOption}
-										showDefaultDisabledOption
+									<SelectInput
+										value={data.activity_level_id}
+										options={activityLevelOptions}
+										onChange={(e) => {
+											setData('activity_level_id', e.target.value)
+										}}
+										isControlled
 										required
 									/>
 								</Label>
@@ -289,8 +273,8 @@ const CreateTour = ({
 								type="reset"
 								onClick={() => {
 									reset()
-									daysCounter.resetCounter()
-									nightsCounter.resetCounter()
+									// daysCounter.resetCounter()
+									// nightsCounter.resetCounter()
 									clearErrors()
 								}}
 								text="Cancel"

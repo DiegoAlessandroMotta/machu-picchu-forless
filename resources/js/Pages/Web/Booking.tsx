@@ -3,7 +3,7 @@ import { PackageInformation } from '@/components/sections/booking/PackageInforma
 import { ReservationSummary } from '@/components/sections/booking/ReservationSummary'
 import { TravellersInformation } from '@/components/sections/booking/TravellersInformation'
 import { ExtraInformation } from '@/components/sections/tour/ExtraInformation'
-import { defaultReservation } from '@/consts'
+import { defaultTraveler } from '@/consts'
 import MainLayout from '@/layouts/MainLayout'
 import { Head, useForm } from '@inertiajs/react'
 import { useCallback } from 'react'
@@ -16,12 +16,29 @@ interface Props extends PageProps {
 }
 
 const Booking = ({ tours, genders, documentTypes, countries }: Props) => {
+	const params = new URLSearchParams(location.search)
 	const { data, setData, post, processing /*, errors, reset, clearErrors */ } =
-		useForm<ReservationForm>(defaultReservation)
+		useForm<ReservationForm>({
+			full_name: '',
+			email: '',
+			phone: '',
+			country_id: params.get('country') ?? '',
+			start_date: params.get('startDate') || '',
+			alternative_date: '',
+			additional_info: '',
+			heard_about_us: '',
+			reservation_state_id: '',
+			customer_id: '',
+			tour_code: params.get('tour') || '',
+			package_id: '',
+			reservation_policies: false,
+			travelers: [defaultTraveler],
+			extra_date: new Date()
+		})
 
 	const setTour = useCallback(
-		(tourId: string) => {
-			setData('tour_id', tourId)
+		(tourCode: string) => {
+			setData('tour_code', tourCode)
 		},
 		[setData]
 	)
@@ -162,7 +179,7 @@ const Booking = ({ tours, genders, documentTypes, countries }: Props) => {
 						</form>
 						<ReservationSummary
 							tours={tours}
-							tourId={data.tour_id}
+							tourCode={data.tour_code}
 							startDate={data.start_date}
 							alternativeDate={data.alternative_date}
 							numberOfTravelers={data.travelers.length}

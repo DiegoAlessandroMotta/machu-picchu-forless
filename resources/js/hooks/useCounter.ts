@@ -1,35 +1,45 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 
 interface UseCounterProps {
-  min?: number
-  max?: number
-  defaultValue?: number
+	min?: number
+	max?: number
+	defaultValue?: number
 }
 
-export const useCounter = ({ min, max, defaultValue }: UseCounterProps) => {
-  const [counter, setCounter] = useState<number>(defaultValue ?? min ?? 1)
-  const minValue = useMemo(() => min ?? 1, [min])
-  const maxValue = useMemo(() => max ?? 100, [max])
+export const useCounter = ({
+	min = 0,
+	max = 100,
+	defaultValue = min
+}: UseCounterProps) => {
+	const [counter, setCounter] = useState<number>(defaultValue)
 
-  const decrementCounter = useCallback(() => {
-    setCounter((prev) => Math.max(prev - 1, minValue))
-  }, [minValue])
+	const minValue = useMemo(() => min, [min])
+	const maxValue = useMemo(() => max, [max])
 
-  const incrementCounter = useCallback(() => {
-    setCounter((prev) => Math.min(prev + 1, maxValue))
-  }, [maxValue])
+	const decrementCounter = () => {
+		setCounter((prev) => Math.max(prev - 1, minValue))
+	}
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value)
-    if (!isNaN(newValue) && newValue >= minValue && newValue <= maxValue) {
-      setCounter(newValue)
-    }
-  }, [minValue, maxValue])
+	const incrementCounter = () => {
+		setCounter((prev) => Math.min(prev + 1, maxValue))
+	}
 
-  const resetCounter = useCallback(() => {
-    setCounter(defaultValue ?? min ?? 1)
-  }, [defaultValue, min])
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = Number(e.target.value)
+		if (!isNaN(newValue) && newValue >= minValue && newValue <= maxValue) {
+			setCounter(newValue)
+		}
+	}
 
+	const resetCounter = useCallback(() => {
+		setCounter(defaultValue)
+	}, [defaultValue])
 
-  return { counter, decrementCounter, incrementCounter, handleChange, resetCounter }
+	return {
+		counter,
+		decrementCounter,
+		incrementCounter,
+		handleChange,
+		resetCounter
+	}
 }

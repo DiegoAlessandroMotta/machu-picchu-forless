@@ -14,7 +14,7 @@ const CustomLabel = ({ label, value }: PropsShowValue) => {
 
 interface Props {
 	tours: Tour[]
-	tourId: ReservationForm['tour_id']
+	tourCode: ReservationForm['tour_code']
 	startDate: string
 	alternativeDate: string
 	numberOfTravelers: number
@@ -22,12 +22,12 @@ interface Props {
 
 export const ReservationSummary = ({
 	tours,
-	tourId,
+	tourCode,
 	startDate,
 	alternativeDate,
 	numberOfTravelers
 }: Props) => {
-	const currentTour = tours.find((tour) => String(tour.id) === tourId)
+	const currentTour = tours.find((tour) => String(tour.code) === tourCode)
 	const pricePerPerson =
 		currentTour !== undefined ? Number(currentTour.price) : 0
 	const name = currentTour !== undefined ? currentTour.name : ''

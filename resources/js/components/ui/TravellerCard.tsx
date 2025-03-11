@@ -1,6 +1,6 @@
 import { Input } from '@/components/atoms/Input'
 import { InputRadioCheckbox } from '@/components/atoms/InputRadioCheckbox'
-import { SelectInput } from '@/components/atoms/InputSelector'
+import { SelectInput } from '@/components/atoms/SelectInput'
 import { Label } from '@/components/atoms/Label'
 import { XCircleIcon } from '@/components/icons/XCircleIcon'
 
@@ -111,6 +111,7 @@ export const TravellerCard = ({
 								onUpdate('document_type_id', e.target.value)
 							}}
 							options={documentTypeOptions}
+							isControlled
 							required
 						/>
 					</Label>

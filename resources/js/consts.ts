@@ -114,7 +114,7 @@ export const defaultReservation: ReservationForm = {
 	heard_about_us: '',
 	reservation_state_id: '',
 	customer_id: '',
-	tour_id: '',
+	tour_code: '',
 	package_id: '',
 	reservation_policies: false,
 	travelers: [defaultTraveler],

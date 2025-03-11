@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ToursController;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -15,9 +16,11 @@ Route::get('/', function () {
 
 Route::get('/tour/{id}', function (string $identifier) {
   $tour = new ToursController()->show($identifier);
+  $countries = Country::orderBy('name', 'asc')->get();
 
   return Inertia::render('Tour', [
-    'tour' => $tour
+    'tour' => $tour,
+    'countries' => $countries
   ]);
 });
 

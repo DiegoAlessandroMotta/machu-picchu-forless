@@ -22,7 +22,7 @@ class StoreReservationRequest extends FormRequest
       'alternative_date' => ['sometimes'],
       'additional_info' => ['sometimes'],
       'heard_about_us' => ['sometimes'],
-      'tour_id' => ['sometimes'],
+      'tour_code' => ['sometimes'],
       'package_id' => ['sometimes'],
       // 'travelers' => ['required'],
       'extra_date' => ['sometimes', 'date'],

@@ -1,24 +1,15 @@
 import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
 import { Input } from '@/components/atoms/Input'
 import { InputCounter } from '@/components/atoms/InputCounter'
-import { SelectInput } from '@/components/atoms/InputSelector'
+import { SelectInput } from '@/components/atoms/SelectInput'
 import { Label } from '@/components/atoms/Label'
 import { useCounter } from '@/hooks/useCounter'
 import { useForm } from '@inertiajs/react'
 import { useEffect } from 'react'
 
-const countryOptions = [
-	{
-		label: 'United States',
-		value: 'united-states'
-	},
-	{
-		label: 'Perú',
-		value: 'peru'
-	}
-]
 interface Props {
 	code: string
+	countries: Country[]
 }
 
 interface FormDataType {
@@ -28,7 +19,7 @@ interface FormDataType {
 	tour: string
 }
 
-export const ReservationCard = ({ code }: Props) => {
+export const ReservationCard = ({ code, countries }: Props) => {
 	const { data, setData, get, processing } = useForm<FormDataType>({
 		startDate: '',
 		country: '',
@@ -39,14 +30,19 @@ export const ReservationCard = ({ code }: Props) => {
 	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		get(route('booking'))
+		get(route('reservation'))
 	}
 
 	const travelersCounter = useCounter({ min: 1, max: 30, defaultValue: 2 })
 
+	const countryOptions = countries.map((country) => ({
+		value: String(country.id),
+		label: country.name
+	}))
+
 	useEffect(() => {
 		setData('travelers', travelersCounter.counter)
-	}, [travelersCounter.counter, setData])
+	}, [travelersCounter.counter])
 
 	return (
 		<div className="w-96 overflow-hidden rounded-lg shadow-md">
@@ -88,7 +84,7 @@ export const ReservationCard = ({ code }: Props) => {
 				</Label>
 
 				<ButtonPrimary type="submit" fullWidth>
-					{processing === true ? 'Book Now!' : 'Loading...'}
+					{processing === true ? 'Loading...' : 'Book Now!'}
 				</ButtonPrimary>
 			</form>
 		</div>

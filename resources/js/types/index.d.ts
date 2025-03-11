@@ -118,7 +118,7 @@ interface ReservationForm {
 	heard_about_us: string
 	reservation_state_id: string
 	customer_id: string
-	tour_id: string
+	tour_code: string
 	package_id: string
 	travelers: Traveler[]
 	reservation_policies: boolean

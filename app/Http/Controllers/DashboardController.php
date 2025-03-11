@@ -33,14 +33,14 @@ class DashboardController extends Controller
 
   public function create_tours(): Response
   {
-    $service_type_options = TourServiceType::orderBy('name', 'asc')->get();
-    $category_options = TourCategories::orderBy('name', 'asc')->get();
-    $activity_level_options = ActivityLevels::orderBy('name', 'asc')->get();
+    $service_types = TourServiceType::orderBy('name', 'asc')->get();
+    $categories = TourCategories::orderBy('name', 'asc')->get();
+    $activity_levels = ActivityLevels::orderBy('name', 'asc')->get();
 
     return Inertia::render('Dashboard/Tours/Create', [
-      'serviceTypeOptions' => $service_type_options,
-      'categoryOptions' => $category_options,
-      'activityLevelOptions' => $activity_level_options
+      'serviceTypes' => $service_types,
+      'categories' => $categories,
+      'activityLevels' => $activity_levels
     ]);
   }
 

@@ -6,9 +6,10 @@ import { Head } from '@inertiajs/react'
 
 interface PageProps {
 	tour: Tour
+	countries: Country[]
 }
 
-const Tour = ({ tour }: PageProps) => {
+const Tour = ({ tour, countries }: PageProps) => {
 	return (
 		<>
 			<Head title="Machu Picchu Forless" />
@@ -31,7 +32,7 @@ const Tour = ({ tour }: PageProps) => {
 							days={tour.days}
 							description={tour.description ?? undefined}
 						>
-							<ReservationCard code={tour.code} />
+							<ReservationCard code={tour.code} countries={countries} />
 						</TourInformation>
 					</>
 				)}
