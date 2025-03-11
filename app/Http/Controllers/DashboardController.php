@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTourRequest;
 use App\Models\ActivityLevels;
 use App\Models\TourCategories;
-use App\Models\Tours;
 use App\Models\TourServiceType;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -33,9 +33,9 @@ class DashboardController extends Controller
 
   public function create_tours(): Response
   {
-    $service_type_options = TourServiceType::orderByDesc('name')->get();
-    $category_options = TourCategories::orderByDesc('name')->get();
-    $activity_level_options = ActivityLevels::orderByDesc('name')->get();
+    $service_type_options = TourServiceType::orderBy('name', 'asc')->get();
+    $category_options = TourCategories::orderBy('name', 'asc')->get();
+    $activity_level_options = ActivityLevels::orderBy('name', 'asc')->get();
 
     return Inertia::render('Dashboard/Tours/Create', [
       'serviceTypeOptions' => $service_type_options,
@@ -44,7 +44,7 @@ class DashboardController extends Controller
     ]);
   }
 
-  public function store_tour(StoreTourRequest $request)
+  public function store_tour(StoreTourRequest $request): RedirectResponse
   {
     (new ToursController())->store($request);
 

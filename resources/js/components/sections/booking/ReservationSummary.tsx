@@ -13,19 +13,26 @@ const CustomLabel = ({ label, value }: PropsShowValue) => {
 }
 
 interface Props {
-	data: ReservationSummaryType
+	tours: Tour[]
+	tourId: ReservationForm['tour_id']
+	startDate: string
+	alternativeDate: string
+	numberOfTravelers: number
 }
 
-export const ReservationSummary = ({ data }: Props) => {
-	const {
-		pricePerPerson = 0,
-		tour = '',
-		typeService = '',
-		travelDate = '',
-		alternativeDate = '',
-		numberOfTravellers = 1,
-		total = 0
-	} = data
+export const ReservationSummary = ({
+	tours,
+	tourId,
+	startDate,
+	alternativeDate,
+	numberOfTravelers
+}: Props) => {
+	const currentTour = tours.find((tour) => String(tour.id) === tourId)
+	const pricePerPerson =
+		currentTour !== undefined ? Number(currentTour.price) : 0
+	const name = currentTour !== undefined ? currentTour.name : ''
+	const serviceType = currentTour !== undefined ? currentTour.service_type : ''
+	const total = pricePerPerson * numberOfTravelers
 
 	return (
 		<section className="mx-auto flex h-fit w-full flex-col gap-4 rounded-lg bg-white shadow-md md:w-fit lg:min-w-96">
@@ -46,13 +53,13 @@ export const ReservationSummary = ({ data }: Props) => {
 				</header>
 
 				<div className="flex flex-col gap-2">
-					<CustomLabel label="Tour:" value={tour} />
-					<CustomLabel label="Type Service:" value={typeService} />
-					<CustomLabel label="Travel Date:" value={travelDate} />
+					<CustomLabel label="Tour:" value={name} />
+					<CustomLabel label="Type Service:" value={serviceType} />
+					<CustomLabel label="Travel Date:" value={startDate} />
 					<CustomLabel label="Alternative Date:" value={alternativeDate} />
 					<CustomLabel
 						label="Number of Travellers:"
-						value={numberOfTravellers}
+						value={numberOfTravelers}
 					/>
 				</div>
 			</div>

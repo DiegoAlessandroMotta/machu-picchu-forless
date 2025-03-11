@@ -12,6 +12,11 @@ type PageProps<T extends Record<string, unknown> = Record<string, unknown>> =
 		}
 	}
 
+interface InputSelectOption {
+	value: string
+	label: string
+}
+
 interface ReservationSummaryType {
 	pricePerPerson?: number
 	tour?: string
@@ -50,4 +55,71 @@ interface HeadProps {
 	description?: string
 	imgUrl?: string
 	url?: string
+}
+
+interface Tour {
+	id: number
+	code: string
+	name: string
+	price: string
+	days: number
+	nights: number
+	description: string | null
+	main_banner: string
+	max_altitude: string
+	service_type_id: number
+	category_id: number
+	activity_level_id: number
+	service_type: string
+	category: string
+	activity_level: string
+}
+
+interface Gender {
+	id: number
+	code: string
+	name: string
+}
+
+interface DocType {
+	id: number
+	code: string
+	name: string
+}
+
+interface Country {
+	id: number
+	code: string
+	name: string
+}
+
+interface Traveler {
+	id: number
+	first_name: string
+	last_name: string
+	birth_date: string
+	document_number: string
+	allergic: string
+	gender_id: string
+	document_type_id: string
+}
+
+type TravelerKey = keyof Traveler
+
+interface ReservationForm {
+	full_name: string
+	email: string
+	phone: string
+	country_id: string
+	start_date: string
+	alternative_date: string
+	extra_date: Date | null
+	additional_info: string
+	heard_about_us: string
+	reservation_state_id: string
+	customer_id: string
+	tour_id: string
+	package_id: string
+	travelers: Traveler[]
+	reservation_policies: boolean
 }

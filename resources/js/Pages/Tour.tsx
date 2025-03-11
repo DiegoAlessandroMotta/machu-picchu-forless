@@ -4,31 +4,11 @@ import { TourInformation } from '@/components/sections/tour/TourInformation'
 import MainLayout from '@/layouts/MainLayout'
 import { Head } from '@inertiajs/react'
 
-interface Tour {
-	id: number
-	code: string
-	name: string
-	price: string
-	days: number
-	nights: number
-	description: string | null
-	main_banner: string
-	max_altitude: string
-	service_type_id: number
-	category_id: number
-	activity_level_id: number
-	service_type: string
-	category: string
-	activity_level: string
-}
-
 interface PageProps {
 	tour: Tour
 }
 
 const Tour = ({ tour }: PageProps) => {
-	console.log(tour)
-
 	return (
 		<>
 			<Head title="Machu Picchu Forless" />

@@ -13,13 +13,13 @@ return new class extends Migration
   {
     Schema::create('packages', function (Blueprint $table) {
       $table->id();
-      $table->string("code")->unique();
-      $table->string("name")->unique();
-      $table->integer("days");
-      $table->integer("nights");
+      $table->string('code')->unique();
+      $table->string('name')->unique();
+      $table->integer('days');
+      $table->integer('nights');
       $table->decimal('price', total: 8, places: 2);
-      $table->string("description", 1023)->nullable();
-      $table->string("main_banner");
+      $table->text('description')->nullable();
+      $table->string('main_banner');
       $table->foreignId('service_type_id')
         ->constrained(table: 'tour_service_types');
       $table->foreignId('activity_level_id')

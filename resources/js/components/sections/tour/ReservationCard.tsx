@@ -1,7 +1,7 @@
 import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
 import { Input } from '@/components/atoms/Input'
 import { InputCounter } from '@/components/atoms/InputCounter'
-import SelectInput from '@/components/atoms/InputSelector'
+import { SelectInput } from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
 import { useCounter } from '@/hooks/useCounter'
 import { useForm } from '@inertiajs/react'
@@ -29,13 +29,12 @@ interface FormDataType {
 }
 
 export const ReservationCard = ({ code }: Props) => {
-	const { data, setData, get, processing } =
-		useForm<FormDataType>({
-			startDate: '',
-			country: '',
-			travelers: 2,
-			tour: code
-		})
+	const { data, setData, get, processing } = useForm<FormDataType>({
+		startDate: '',
+		country: '',
+		travelers: 2,
+		tour: code
+	})
 
 	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -47,7 +46,7 @@ export const ReservationCard = ({ code }: Props) => {
 
 	useEffect(() => {
 		setData('travelers', travelersCounter.counter)
-	}, [travelersCounter.counter])
+	}, [travelersCounter.counter, setData])
 
 	return (
 		<div className="w-96 overflow-hidden rounded-lg shadow-md">

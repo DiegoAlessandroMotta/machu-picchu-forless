@@ -13,14 +13,14 @@ return new class extends Migration
   {
     Schema::create('reservations', function (Blueprint $table) {
       $table->id();
-      $table->date("start_date");
-      $table->date("alternative_date");
-      $table->string("additional_info", 1023)->nullable();
-      $table->string("heard_about_us", 1023)->nullable();
+      $table->date('start_date');
+      $table->date('alternative_date');
+      $table->string('additional_info', 2047)->nullable();
+      $table->string('heard_about_us', 1023)->nullable();
       $table->foreignId('reservation_state_id')
         ->constrained(table: 'reservation_states');
-      $table->foreignId('client_id')
-        ->constrained(table: 'clients');
+      $table->foreignId('customer_id')
+        ->constrained(table: 'customers');
       $table->foreignId('tour_id')
         ->nullable()
         ->constrained(table: 'tours');

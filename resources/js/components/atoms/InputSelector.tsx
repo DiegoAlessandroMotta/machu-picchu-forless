@@ -97,7 +97,7 @@ export const InputSelector = ({
 }
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-	options: { value: string; label: string }[]
+	options: InputSelectOption[]
 	value?: string
 	onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 	defaultValue?: string
@@ -105,7 +105,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 	className?: string
 }
 
-const SelectInput = ({
+export const SelectInput = ({
 	options,
 	value,
 	onChange,
@@ -134,5 +134,3 @@ const SelectInput = ({
 		</select>
 	)
 }
-
-export default SelectInput

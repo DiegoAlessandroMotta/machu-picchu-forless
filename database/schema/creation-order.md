@@ -18,13 +18,13 @@
 - genders:1
 - document_types:1
 - countries:1
-- clients:1 (genders, document_types, countries)
+- customers:1 (genders, document_types, countries)
 
 ## Reservations
 
 - reservation_states:1
 - packages:2 (activity_levels)
-- reservations:2 (reservation_states, clients, tours?, packages?)
+- reservations:2 (reservation_states, customers, tours?, packages?)
 - travelers:0 (genders, document_types, reservations)
 - tour_packages:0 (tours, packages)
 
