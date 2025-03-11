@@ -7,7 +7,8 @@ import { Card } from '@/dashboard/components/card'
 import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
 import { SearchInput } from '@/dashboard/components/SearchInput'
-import AuthenticatedLayout from '@/layouts/DashboardLayout'
+import { DashboardLayout } from '@/layouts/DashboardLayout'
+import { CustomHead } from '@/layouts/CustomHead'
 import { Link } from '@inertiajs/react'
 
 interface Tour {
@@ -32,9 +33,10 @@ interface ToursPageProps extends PageProps {
 	tours: Tour[]
 }
 
-export default function ListTours({ tours }: ToursPageProps) {
+const ListTours = ({ tours }: ToursPageProps) => {
 	return (
-		<AuthenticatedLayout title="Tours">
+		<>
+			<CustomHead title="List Tours" />
 			<Container>
 				<Header title="Tours">
 					<Link href={route('dashboard.tours.create')} prefetch>
@@ -105,6 +107,11 @@ export default function ListTours({ tours }: ToursPageProps) {
 					</div>
 				</Card>
 			</Container>
-		</AuthenticatedLayout>
+		</>
 	)
 }
+
+const layout: LayoutType = (page) => <DashboardLayout children={page} />
+ListTours.layout = layout
+
+export default ListTours

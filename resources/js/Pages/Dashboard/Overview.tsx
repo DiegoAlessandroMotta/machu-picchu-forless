@@ -1,13 +1,21 @@
 import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
-import AuthenticatedLayout from '@/layouts/DashboardLayout'
+import { DashboardLayout } from '@/layouts/DashboardLayout'
+import { CustomHead } from '@/layouts/CustomHead'
 
-export default function Dashboard() {
+const Dashboard = () => {
 	return (
-		<AuthenticatedLayout title='Dashboard'>
+		<>
+			<CustomHead title="Dashboard" />
 			<Container>
 				<Header title="Overview" />
 			</Container>
-		</AuthenticatedLayout>
+		</>
 	)
 }
+
+Dashboard.layout = (page: React.ReactNode) => (
+	<DashboardLayout children={page} />
+)
+
+export default Dashboard

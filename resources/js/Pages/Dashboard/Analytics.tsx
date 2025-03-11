@@ -1,13 +1,20 @@
 import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
-import DashboardLayout from '@/layouts/DashboardLayout'
+import { DashboardLayout } from '@/layouts/DashboardLayout'
+import { CustomHead } from '@/layouts/CustomHead'
 
-export default function Analytics() {
+const Analytics = () => {
 	return (
-		<DashboardLayout title="Analytics">
+		<>
+			<CustomHead title="Analytics" />
 			<Container>
-				<Header title="Analitics" />
+				<Header title="Analytics" />
 			</Container>
-		</DashboardLayout>
+		</>
 	)
 }
+
+const layout: LayoutType = (page) => <DashboardLayout children={page} />
+Analytics.layout = layout
+
+export default Analytics

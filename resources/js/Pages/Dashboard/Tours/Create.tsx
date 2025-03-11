@@ -11,7 +11,8 @@ import { Card } from '@/dashboard/components/card'
 import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
 import { useCounter } from '@/hooks/useCounter'
-import DashboardLayout from '@/layouts/DashboardLayout'
+import { DashboardLayout } from '@/layouts/DashboardLayout'
+import { CustomHead } from '@/layouts/CustomHead'
 import { formatUrlCode } from '@/utils/format-values'
 import { Link, useForm } from '@inertiajs/react'
 import React, { useEffect } from 'react'
@@ -31,12 +32,13 @@ interface ToursPageProps extends PageProps {
 const FormRow = React.memo(({ children }: React.PropsWithChildren) => {
 	return <div className="grid gap-4 md:grid-cols-2">{children}</div>
 })
+FormRow.displayName = 'FormRow'
 
-export default function CreateTour({
+const CreateTour = ({
 	serviceTypeOptions,
 	categoryOptions,
 	activityLevelOptions
-}: ToursPageProps) {
+}: ToursPageProps) => {
 	const { data, setData, post, processing, errors, reset, clearErrors } =
 		useForm({
 			name: '',
@@ -59,9 +61,6 @@ export default function CreateTour({
 			preserveScroll: true,
 			onSuccess: () => {
 				reset()
-			},
-			onError: () => {
-				console.log('Something went wrong')
 			}
 		})
 	}
@@ -70,13 +69,13 @@ export default function CreateTour({
 
 	useEffect(() => {
 		setData('days', daysCounter.counter)
-	}, [daysCounter.counter])
+	}, [daysCounter.counter, setData])
 
 	const nightsCounter = useCounter({ min: 0, max: 30, defaultValue: 1 })
 
 	useEffect(() => {
 		setData('nights', nightsCounter.counter)
-	}, [nightsCounter.counter])
+	}, [nightsCounter.counter, setData])
 
 	const serviceTypeSelector = useInputSelector({
 		options: serviceTypeOptions.map((option) => ({
@@ -87,7 +86,7 @@ export default function CreateTour({
 
 	useEffect(() => {
 		setData('service_type_id', serviceTypeSelector.selectedValue)
-	}, [serviceTypeSelector.selectedValue])
+	}, [serviceTypeSelector.selectedValue, setData])
 
 	const categorySelector = useInputSelector({
 		options: categoryOptions.map((option) => ({
@@ -98,7 +97,7 @@ export default function CreateTour({
 
 	useEffect(() => {
 		setData('category_id', categorySelector.selectedValue)
-	}, [categorySelector.selectedValue])
+	}, [categorySelector.selectedValue, setData])
 
 	const activityLevelSelector = useInputSelector({
 		options: activityLevelOptions.map((option) => ({
@@ -109,10 +108,11 @@ export default function CreateTour({
 
 	useEffect(() => {
 		setData('activity_level_id', activityLevelSelector.selectedValue)
-	}, [activityLevelSelector.selectedValue])
+	}, [activityLevelSelector.selectedValue, setData])
 
 	return (
-		<DashboardLayout title="Create Tours">
+		<>
+			<CustomHead title="Create Tours" />
 			<Container>
 				<Header title="Create Tour">
 					<Link href={route('dashboard.tours.list')} prefetch>
@@ -304,6 +304,11 @@ export default function CreateTour({
 					</form>
 				</Card>
 			</Container>
-		</DashboardLayout>
+		</>
 	)
 }
+
+const layout: LayoutType = (page) => <DashboardLayout children={page} />
+CreateTour.layout = layout
+
+export default CreateTour
