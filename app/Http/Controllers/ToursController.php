@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTourRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tours;
 
@@ -25,9 +26,27 @@ class ToursController extends Controller
     return $tours;
   }
 
-  public function store()
+  public function store(StoreTourRequest $request)
   {
-    //
+    // $request->persist();
+
+    $validatedTour = $request->validated();
+
+    $tour = new Tours;
+
+    $tour->code = $validatedTour["code"];
+    $tour->name = $validatedTour["name"];
+    $tour->price = $validatedTour["price"];
+    $tour->days = $validatedTour["days"];
+    $tour->nights = $validatedTour["nights"];
+    $tour->description = $validatedTour["description"];
+    $tour->main_banner = $validatedTour["main_banner"] ?? 'main banner path';
+    $tour->max_altitude = $validatedTour["max_altitude"];
+    $tour->service_type_id = $validatedTour["service_type_id"];
+    $tour->category_id = $validatedTour["category_id"];
+    $tour->activity_level_id = $validatedTour["activity_level_id"];
+
+    $tour->save();
   }
 
   public function show($identifier)

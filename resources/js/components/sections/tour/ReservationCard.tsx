@@ -1,11 +1,11 @@
 import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
 import { Input } from '@/components/atoms/Input'
 import { InputCounter } from '@/components/atoms/InputCounter'
-import SelectInput, { InputSelector } from '@/components/atoms/InputSelector'
+import SelectInput from '@/components/atoms/InputSelector'
 import { Label } from '@/components/atoms/Label'
 import { useCounter } from '@/hooks/useCounter'
-import { router, useForm } from '@inertiajs/react'
-import { useCallback, useEffect, useRef } from 'react'
+import { useForm } from '@inertiajs/react'
+import { useEffect } from 'react'
 
 const countryOptions = [
 	{
@@ -29,7 +29,7 @@ interface FormDataType {
 }
 
 export const ReservationCard = ({ code }: Props) => {
-	const { data, setData, get, processing, errors, reset, clearErrors } =
+	const { data, setData, get, processing } =
 		useForm<FormDataType>({
 			startDate: '',
 			country: '',
