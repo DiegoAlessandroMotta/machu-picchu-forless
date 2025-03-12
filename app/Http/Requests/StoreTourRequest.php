@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Tours;
 
 class StoreTourRequest extends FormRequest
 {
@@ -35,7 +33,13 @@ class StoreTourRequest extends FormRequest
       'days' => ['required', 'integer', 'min:0'],
       'nights' => ['required', 'integer', 'min:0'],
       'description' => ['sometimes', 'max:4095'],
-      'main_banner' => ['sometimes', 'max:255'],
+      'main_banner' => [
+        'required',
+        'extensions:png,jpg,jpeg',
+        'mimetypes:image/png,image/jpg,image/jpeg',
+        'max:5120',
+        'dimensions:min_width=720,min_height=540,max_width=2560,max_height=1440'
+      ],
     ];
   }
 
@@ -76,7 +80,11 @@ class StoreTourRequest extends FormRequest
       'activity_level_id.exists' => 'The selected activity level does not exist',
       'days.min' => 'The number of days must be a positive value',
       'nights.min' => 'The number of nights must be a positive value',
-      'description.max' => 'The description is too long (maximum length of 4095 characters)'
+      'description.max' => 'The description is too long (maximum length of 4095 characters)',
+      'main_banner.extensions' => 'The main banner must be a file of type: png, jpg, jpeg',
+      'main_banner.mimetypes' => 'The main banner must be an image of type: png, jpg, jpeg',
+      'main_banner.max' => 'The main banner must not be greater than 5MB',
+      'main_banner.dimensions' => 'The main banner has invalid image dimensions. Minimum dimensions are 720x540 and maximum dimensions are 2560x1440',
     ];
   }
 

@@ -5,13 +5,19 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ToursController;
 use App\Models\Country;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-  return Inertia::render('Home');
+  $tours = DB::table('tours')
+    ->orderBy('tours.created_at', 'desc')
+    ->limit(6)
+    ->get();
+
+  return Inertia::render('Home', [
+    'tours' => $tours
+  ]);
 });
 
 Route::get('/tour/{id}', function (string $identifier) {

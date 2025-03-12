@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTourRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tours;
+use Illuminate\Support\Carbon;
 
 class ToursController extends Controller
 {
@@ -40,11 +41,16 @@ class ToursController extends Controller
     $tour->days = $validatedTour["days"];
     $tour->nights = $validatedTour["nights"];
     $tour->description = $validatedTour["description"];
-    $tour->main_banner = $validatedTour["main_banner"] ?? 'main banner path';
     $tour->max_altitude = $validatedTour["max_altitude"];
     $tour->service_type_id = $validatedTour["service_type_id"];
     $tour->category_id = $validatedTour["category_id"];
     $tour->activity_level_id = $validatedTour["activity_level_id"];
+
+    if (isset($validatedTour["main_banner"])) {
+      $imageName =  Carbon::now()->timestamp . uniqid() . '.' . $validatedTour["main_banner"]->extension();
+      $validatedTour["main_banner"]->storeAs('img', $imageName, 'static');
+      $tour->main_banner = '/static/img/' . $imageName;
+    }
 
     $tour->save();
   }

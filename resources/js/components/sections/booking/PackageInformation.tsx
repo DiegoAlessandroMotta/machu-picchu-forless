@@ -17,6 +17,7 @@ interface Props {
 	setAlternativeDate: (date: string) => void
 	setExtraDate: (date: Date | null) => void
 	data: ReservationForm
+	errors: Partial<Record<keyof ReservationForm, string>>
 }
 
 export const PackageInformation = ({

@@ -1,8 +1,9 @@
+import { ButtonPrimary } from '@/components/atoms/ButtonPrimary'
 import { Banner } from '@/components/sections/tour/Banner'
 import { ReservationCard } from '@/components/sections/tour/ReservationCard'
 import { TourInformation } from '@/components/sections/tour/TourInformation'
 import MainLayout from '@/layouts/MainLayout'
-import { Head } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 
 interface PageProps {
 	tour: Tour
@@ -22,22 +23,20 @@ const Tour = ({ tour, countries }: PageProps) => {
 							price={Number(tour.price)}
 							days={tour.days}
 						/>
-						<TourInformation
-							typeOfService={tour.service_type}
-							duration={tour.days}
-							maxAltitude={tour.max_altitude}
-							activityLevel={tour.activity_level}
-							title={tour.name}
-							price={Number(tour.price)}
-							days={tour.days}
-							description={tour.description ?? undefined}
-						>
+						<TourInformation tour={tour}>
 							<ReservationCard code={tour.code} countries={countries} />
 						</TourInformation>
 					</>
 				)}
 
-				{tour === undefined && <p>Tour no encontrado :P</p>}
+				{tour === undefined && (
+					<div className="container mx-auto flex flex-col items-center gap-4">
+						<div>Not found</div>
+						<Link href="/">
+							<ButtonPrimary>Go back</ButtonPrimary>
+						</Link>
+					</div>
+				)}
 			</MainLayout>
 		</>
 	)

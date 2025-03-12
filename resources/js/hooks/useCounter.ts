@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState } from 'react'
 
 interface UseCounterProps {
 	min?: number
@@ -13,8 +13,8 @@ export const useCounter = ({
 }: UseCounterProps) => {
 	const [counter, setCounter] = useState<number>(defaultValue)
 
-	const minValue = useMemo(() => min, [min])
-	const maxValue = useMemo(() => max, [max])
+	const minValue = min
+	const maxValue = max
 
 	const decrementCounter = () => {
 		setCounter((prev) => Math.max(prev - 1, minValue))
@@ -31,9 +31,9 @@ export const useCounter = ({
 		}
 	}
 
-	const resetCounter = useCallback(() => {
+	const resetCounter = () => {
 		setCounter(defaultValue)
-	}, [defaultValue])
+	}
 
 	return {
 		counter,

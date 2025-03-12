@@ -12,7 +12,9 @@ import { DashboardLayout } from '@/layouts/DashboardLayout'
 import { CustomHead } from '@/layouts/CustomHead'
 import { formatUrlCode } from '@/utils/format-values'
 import { Link, useForm } from '@inertiajs/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FileInput } from 'flowbite-react'
+import { CloudArrowUpIcon } from '@/components/icons/CloudArrowUp'
 
 interface Option {
 	id: string
@@ -35,31 +37,49 @@ const CreateTour = ({
 	categories,
 	activityLevels
 }: ToursPageProps) => {
-	const { data, setData, post, processing, errors, reset, clearErrors } =
-		useForm({
-			name: '',
-			code: '',
-			price: '',
-			days: 1,
-			nights: 1,
-			description: '',
-			main_banner: '',
-			max_altitude: '',
-			service_type_id: '',
-			category_id: '',
-			activity_level_id: ''
-		})
+	const {
+		data,
+		setData,
+		post,
+		processing,
+		errors,
+		reset,
+		clearErrors,
+		setError
+	} = useForm({
+		name: '',
+		code: '',
+		price: '',
+		days: 1,
+		nights: 1,
+		description: '',
+		max_altitude: '',
+		service_type_id: '',
+		category_id: '',
+		activity_level_id: '',
+		main_banner: '' as any
+	})
+
+	const [imagePreview, setImagePreview] = useState<{
+		dimensions: string
+		size: string
+		url: string
+	} | null>(null)
+
+	const resetAll = () => {
+		daysCounter.resetCounter()
+		nightsCounter.resetCounter()
+		clearErrors()
+		reset()
+	}
 
 	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		// eslint-disable-next-line no-console
-		console.log(data)
-
 		post(route('dashboard.tours.create'), {
 			preserveScroll: true,
 			onSuccess: () => {
-				reset()
+				resetAll()
 			}
 		})
 	}
@@ -90,6 +110,38 @@ const CreateTour = ({
 		label: option.name,
 		value: option.id
 	}))
+
+	const handleFileInputChange = (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
+		if (event.target.files !== null && event.target.files[0] !== undefined) {
+			const file = event.target.files[0]
+
+			if (file.size > 5120 * 1024) {
+				setError('main_banner', 'File size should not exceed 5MB.')
+				return
+			}
+
+			if (['image/png', 'image/jpg', 'image/jpeg'].includes(file.type)) {
+				setData('main_banner', file)
+				clearErrors('main_banner')
+				const previewUrl = URL.createObjectURL(file)
+
+				const img = new Image()
+				img.onload = () => {
+					setImagePreview({
+						dimensions: `${img.width}x${img.height}px`,
+						size: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+						url: previewUrl
+					})
+				}
+
+				img.src = previewUrl
+			} else {
+				setError('main_banner', 'Only PNG, JPG, and JPEG formats are allowed.')
+			}
+		}
+	}
 
 	return (
 		<>
@@ -268,14 +320,57 @@ const CreateTour = ({
 							</Label>
 						</div>
 
+						<div>
+							<Label
+								text="Main Banner"
+								className="text-sm font-semibold"
+								error={errors.main_banner}
+								fullWidth
+							>
+								<div className="flex h-96 w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+									{imagePreview !== null ? (
+										<div className="relative isolate h-full w-full">
+											<img
+												src={imagePreview.url}
+												alt="Preview"
+												className="h-full w-full object-cover"
+											/>
+											<div className="pointer-events-none absolute right-2 top-2 z-10 select-none rounded-lg bg-white/70 px-4 py-2 text-sm text-gray-700">
+												Click to change the banner
+											</div>
+											{imagePreview && (
+												<div className="pointer-events-none absolute bottom-2 left-2 z-10 select-none rounded-lg bg-white/70 px-4 py-2 text-sm text-gray-700">
+													Dimensions: {imagePreview.dimensions} | Size:{' '}
+													{imagePreview.size}
+												</div>
+											)}
+										</div>
+									) : (
+										<div className="flex flex-col items-center justify-center p-6">
+											<CloudArrowUpIcon className="h-12 w-12 text-gray-500" />
+											<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+												<span className="font-semibold">Click to upload</span>
+												<span className="hidden">or drag and drop</span>
+											</p>
+											<p className="text-xs text-gray-500 dark:text-gray-400">
+												{'PNG, JPG or JPEG (MAX. 2560x1440px and 5MB)'}
+											</p>
+										</div>
+									)}
+									<FileInput
+										onChange={handleFileInputChange}
+										className="hidden"
+										accept="image/png, image/jpg, image/jpeg"
+									/>
+								</div>
+							</Label>
+						</div>
+
 						<div className="mt-4 flex flex-wrap justify-end gap-4">
 							<Button.Simple
 								type="reset"
 								onClick={() => {
-									reset()
-									// daysCounter.resetCounter()
-									// nightsCounter.resetCounter()
-									clearErrors()
+									resetAll()
 								}}
 								text="Cancel"
 							/>

@@ -45,6 +45,14 @@ return [
       'throw' => false,
     ],
 
+    'static' => [
+      'driver' => 'local',
+      'root' => storage_path('app/static'),
+      'url' => env('APP_URL') . '/static',
+      'visibility' => 'public',
+      'throw' => false,
+    ],
+
     's3' => [
       'driver' => 's3',
       'key' => env('AWS_ACCESS_KEY_ID'),
@@ -72,6 +80,7 @@ return [
 
   'links' => [
     public_path('storage') => storage_path('app/public'),
+    public_path('static') => storage_path('app/static'),
   ],
 
 ];

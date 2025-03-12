@@ -17,7 +17,7 @@ interface Props extends PageProps {
 
 const Booking = ({ tours, genders, documentTypes, countries }: Props) => {
 	const params = new URLSearchParams(location.search)
-	const { data, setData, post, processing /*, errors, reset, clearErrors */ } =
+	const { data, setData, post, processing, errors /*, reset, clearErrors */ } =
 		useForm<ReservationForm>({
 			full_name: '',
 			email: '',
@@ -159,6 +159,7 @@ const Booking = ({ tours, genders, documentTypes, countries }: Props) => {
 								setAlternativeDate={setAlternativeDate}
 								setExtraDate={setExtraDate}
 								data={data}
+								errors={errors}
 							/>
 							<TravellersInformation
 								documentTypes={documentTypes}

@@ -45,7 +45,7 @@ export const ReservationCard = ({ code, countries }: Props) => {
 	}, [travelersCounter.counter])
 
 	return (
-		<div className="w-96 overflow-hidden rounded-lg shadow-md">
+		<div className="h-fit w-96 overflow-hidden rounded-lg shadow-md">
 			<div className="bg-primary px-8 py-4 text-center text-lg text-white">
 				From <span className="text-2xl font-bold">$2199</span> / per person
 			</div>

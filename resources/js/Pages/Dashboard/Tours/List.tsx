@@ -53,7 +53,7 @@ const ListTours = ({ tours }: ToursPageProps) => {
 							<thead className="border-b bg-gray-100 text-gray-700">
 								<tr className="[&>th]:p-4 [&>th]:text-start">
 									<th>Name</th>
-									<th>Code</th>
+									<th>URL Code</th>
 									<th>Price</th>
 									<th>Days</th>
 									<th>Nights</th>
@@ -95,9 +95,15 @@ const ListTours = ({ tours }: ToursPageProps) => {
 													<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
 														<TrashIcon className="inline-block h-5 w-5" />
 													</button>
-													<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
-														<EyeIcon className="inline-block h-5 w-5" />
-													</button>
+													<Link
+														href={`/tour/${tour.code}`}
+														className="contents"
+														target="_blank"
+													>
+														<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
+															<EyeIcon className="inline-block h-5 w-5" />
+														</button>
+													</Link>
 												</div>
 											</td>
 										</tr>

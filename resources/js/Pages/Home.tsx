@@ -13,7 +13,11 @@ const heroData = {
 	buttonHref: '#'
 }
 
-export default function Home() {
+interface Props {
+	tours: Tour[]
+}
+
+export default function Home({ tours }: Props) {
 	return (
 		<MainLayout>
 			<Hero
@@ -23,7 +27,7 @@ export default function Home() {
 				buttonText={heroData.buttonText}
 				buttonHref={heroData.buttonHref}
 			/>
-			<Promotions />
+			<Promotions tours={tours} />
 			<Travels />
 			<Recomendations />
 		</MainLayout>
