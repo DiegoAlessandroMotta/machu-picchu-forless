@@ -30,7 +30,7 @@ return new class extends Migration
       $table->timestamps();
       $table->string("code")->unique();
       $table->string("name")->unique();
-      $table->string("phone_prefix")->unique();
+      $table->string("phone_prefix");
       $table->boolean("active_status")->default(true);
     });
   }
