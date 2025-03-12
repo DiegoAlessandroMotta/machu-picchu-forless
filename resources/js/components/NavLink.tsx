@@ -11,7 +11,9 @@ export default function NavLink({
 
 	return (
 		<Link
-      onClick={() => {setOpen(false)}}
+			onClick={() => {
+				setOpen(false)
+			}}
 			{...props}
 			className={
 				'inline-flex items-center rounded-md px-4 py-2.5 text-sm font-semibold leading-5 transition duration-150 ease-in-out focus:outline-none ' +

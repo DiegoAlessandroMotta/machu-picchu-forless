@@ -1,6 +1,5 @@
 import Dropdown from '@/components/Dropdown'
-import { SearchIcon } from '@/components/icons/SearchIcon'
-import { User } from '@/types'
+// import { SearchIcon } from '@/components/icons/SearchIcon'
 import { Bars3Icon } from '@/components/icons/Bars3Icon'
 import { SidebarTrigger } from './SidebarContext'
 

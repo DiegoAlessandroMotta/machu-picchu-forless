@@ -1,74 +1,74 @@
 [
-  {
-    "id": "heart-of-the-inca",
-    "title": "Heart Of The Inca",
-    "days": 6,
-    "price": 500,
-    "description": "Cusco, Sacred Valley and Machu Picchu",
-    "bgImgUrl": "/img/heart-of-the-inca.webp",
-    "duration": 1,
-    "typeOfService": "Private Service",
-    "maxAltitude": "Ananiso Canyon Tour",
-    "activityLevel": "Moderate"
-  },
-  {
-    "id": "amazon-river-cruise-and-machu-picchu",
-    "title": "Amazon River Cruise And Machu Picchu",
-    "days": 9,
-    "price": 500,
-    "description": "Galapagos, Cusco, Sacred Valley and Machu Picchu",
-    "bgImgUrl": "/img/cruise.webp",
-    "duration": 1,
-    "typeOfService": "Private Service",
-    "maxAltitude": "Ananiso Canyon Tour",
-    "activityLevel": "Moderate"
-  },
-  {
-    "id": "discover-machu-picchu",
-    "title": "Discover Machu Picchu",
-    "days": 7,
-    "price": 500,
-    "description": "Cusco, Rainbow Mountain, Machu Picchu & 2-day Inca Trail",
-    "bgImgUrl": "/img/discover-machu-picchu.webp",
-    "duration": 1,
-    "typeOfService": "Private Service",
-    "maxAltitude": "Ananiso Canyon Tour",
-    "activityLevel": "Moderate"
-  },
-  {
-    "id": "machu-picchu-galapagos",
-    "title": "Machu Picchu & Galapagos",
-    "days": 11,
-    "price": 500,
-    "description": "Galapagos, Cusco, Sacred Valley and Machu Picchu",
-    "bgImgUrl": "/img/galapagos.webp",
-    "duration": 1,
-    "typeOfService": "Private Service",
-    "maxAltitude": "Ananiso Canyon Tour",
-    "activityLevel": "Moderate"
-  },
-  {
-    "id": "rainbow-mountain",
-    "title": "Rainbow Mountain",
-    "days": 6,
-    "price": 500,
-    "description": "Cusco, Rainbow Mountain, Machu Picchu & 2-Day Inca Trail",
-    "bgImgUrl": "/img/rainbow.webp",
-    "duration": 1,
-    "typeOfService": "Private Service",
-    "maxAltitude": "Ananiso Canyon Tour",
-    "activityLevel": "Moderate"
-  },
-  {
-    "id": "discover-peru",
-    "title": "Discover Peru",
-    "days": 6,
-    "price": 500,
-    "description": "Cusco, Scared Valley and Machu Picchu",
-    "bgImgUrl": "/img/discover-peru.webp",
-    "duration": 1,
-    "typeOfService": "Private Service",
-    "maxAltitude": "Ananiso Canyon Tour",
-    "activityLevel": "Moderate"
-  }
+	{
+		"id": "heart-of-the-inca",
+		"title": "Heart Of The Inca",
+		"days": 6,
+		"price": 500,
+		"description": "Cusco, Sacred Valley and Machu Picchu",
+		"bgImgUrl": "/img/heart-of-the-inca.webp",
+		"duration": 1,
+		"typeOfService": "Private Service",
+		"maxAltitude": "Ananiso Canyon Tour",
+		"activityLevel": "Moderate"
+	},
+	{
+		"id": "amazon-river-cruise-and-machu-picchu",
+		"title": "Amazon River Cruise And Machu Picchu",
+		"days": 9,
+		"price": 500,
+		"description": "Galapagos, Cusco, Sacred Valley and Machu Picchu",
+		"bgImgUrl": "/img/cruise.webp",
+		"duration": 1,
+		"typeOfService": "Private Service",
+		"maxAltitude": "Ananiso Canyon Tour",
+		"activityLevel": "Moderate"
+	},
+	{
+		"id": "discover-machu-picchu",
+		"title": "Discover Machu Picchu",
+		"days": 7,
+		"price": 500,
+		"description": "Cusco, Rainbow Mountain, Machu Picchu & 2-day Inca Trail",
+		"bgImgUrl": "/img/discover-machu-picchu.webp",
+		"duration": 1,
+		"typeOfService": "Private Service",
+		"maxAltitude": "Ananiso Canyon Tour",
+		"activityLevel": "Moderate"
+	},
+	{
+		"id": "machu-picchu-galapagos",
+		"title": "Machu Picchu & Galapagos",
+		"days": 11,
+		"price": 500,
+		"description": "Galapagos, Cusco, Sacred Valley and Machu Picchu",
+		"bgImgUrl": "/img/galapagos.webp",
+		"duration": 1,
+		"typeOfService": "Private Service",
+		"maxAltitude": "Ananiso Canyon Tour",
+		"activityLevel": "Moderate"
+	},
+	{
+		"id": "rainbow-mountain",
+		"title": "Rainbow Mountain",
+		"days": 6,
+		"price": 500,
+		"description": "Cusco, Rainbow Mountain, Machu Picchu & 2-Day Inca Trail",
+		"bgImgUrl": "/img/rainbow.webp",
+		"duration": 1,
+		"typeOfService": "Private Service",
+		"maxAltitude": "Ananiso Canyon Tour",
+		"activityLevel": "Moderate"
+	},
+	{
+		"id": "discover-peru",
+		"title": "Discover Peru",
+		"days": 6,
+		"price": 500,
+		"description": "Cusco, Scared Valley and Machu Picchu",
+		"bgImgUrl": "/img/discover-peru.webp",
+		"duration": 1,
+		"typeOfService": "Private Service",
+		"maxAltitude": "Ananiso Canyon Tour",
+		"activityLevel": "Moderate"
+	}
 ]

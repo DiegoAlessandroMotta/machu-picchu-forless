@@ -3,7 +3,7 @@ import Label from '@/components/InputLabel'
 import PrimaryButton from '@/components/PrimaryButton'
 import TextInput from '@/components/TextInput'
 import GuestLayout from '@/layouts/GuestLayout'
-import { Head, useForm } from '@inertiajs/react'
+import { useForm } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
 
 export default function ResetPassword({
