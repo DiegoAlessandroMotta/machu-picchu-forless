@@ -115,10 +115,10 @@ const ListTours = ({ tours }: ToursPageProps) => {
 												</a>
 											</td>
 											<td className="max-w-64 truncate p-4">{tour.code}</td>
-											<td>${tour.price}</td>
-											<td>{tour.days}</td>
-											<td>{tour.nights}</td>
-											<td>{tour.max_altitude} m</td>
+											<td className="p-4">$ {tour.price}</td>
+											<td className="p-4">{tour.days}</td>
+											<td className="p-4">{tour.nights}</td>
+											<td className="p-4">{tour.max_altitude} m</td>
 											<td className="max-w-48 truncate p-4">
 												{tour.service_type}
 											</td>
