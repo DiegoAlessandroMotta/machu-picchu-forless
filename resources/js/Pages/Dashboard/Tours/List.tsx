@@ -95,15 +95,16 @@ const ListTours = ({ tours }: ToursPageProps) => {
 													<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
 														<TrashIcon className="inline-block h-5 w-5" />
 													</button>
-													<Link
+													<a
 														href={`/tour/${tour.code}`}
 														className="contents"
 														target="_blank"
+														rel="noreferrer"
 													>
 														<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
 															<EyeIcon className="inline-block h-5 w-5" />
 														</button>
-													</Link>
+													</a>
 												</div>
 											</td>
 										</tr>
