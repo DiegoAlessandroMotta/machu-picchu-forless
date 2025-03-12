@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use DateTime;
+use App\Models\Gender;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 
 class GenderSeeder extends Seeder
 {
@@ -14,22 +12,15 @@ class GenderSeeder extends Seeder
    */
   public function run(): void
   {
-    $now = Carbon::now()->toDateTimeString();
-
-    DB::table('genders')
-      ->insert([
-        [
-          'code' => 'female',
-          'name' => 'Female',
-          'created_at' => $now,
-          'updated_at' => $now,
-        ],
-        [
-          'code' => 'male',
-          'name' => 'Male',
-          'created_at' => $now,
-          'updated_at' => $now,
-        ]
-      ]);
+    Gender::insert([
+      [
+        'code' => 'female',
+        'name' => 'Female',
+      ],
+      [
+        'code' => 'male',
+        'name' => 'Male',
+      ]
+    ]);
   }
 }
