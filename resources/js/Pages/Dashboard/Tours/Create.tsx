@@ -114,33 +114,44 @@ const CreateTour = ({
 	const handleFileInputChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
-		if (event.target.files !== null && event.target.files[0] !== undefined) {
-			const file = event.target.files[0]
+		requestIdleCallback(() => {
+			if (event.target.files === null || event.target.files[0] === undefined) {
+				return
+			}
+
+			const [file] = event.target.files
 
 			if (file.size > 5120 * 1024) {
 				setError('main_banner', 'File size should not exceed 5MB.')
 				return
 			}
 
-			if (['image/png', 'image/jpg', 'image/jpeg'].includes(file.type)) {
-				setData('main_banner', file)
-				clearErrors('main_banner')
-				const previewUrl = URL.createObjectURL(file)
+			if (!['image/png', 'image/jpg', 'image/jpeg'].includes(file.type)) {
+				setError('main_banner', 'Only PNG, JPG, and JPEG formats are allowed.')
+				return
+			}
 
+			setData('main_banner', file)
+			clearErrors('main_banner')
+
+			const reader = new FileReader()
+
+			reader.onload = (e) => {
 				const img = new Image()
+
 				img.onload = () => {
 					setImagePreview({
 						dimensions: `${img.width}x${img.height}px`,
 						size: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
-						url: previewUrl
+						url: e.target?.result as string
 					})
 				}
 
-				img.src = previewUrl
-			} else {
-				setError('main_banner', 'Only PNG, JPG, and JPEG formats are allowed.')
+				img.src = e.target?.result as string
 			}
-		}
+
+			reader.readAsDataURL(file)
+		})
 	}
 
 	return (
