@@ -46,7 +46,27 @@ const Simple = ({ text, icon, iconEnd, fullWidth, ...props }: ButtonProps) => {
 	)
 }
 
+const Danger = ({ text, icon, iconEnd, fullWidth, ...props }: ButtonProps) => {
+	return (
+		<button
+			type="button"
+			className={cn(
+				'flex items-center justify-center gap-1 rounded bg-red-500 px-5 py-2.5 text-sm font-medium text-white transition',
+				'focus-within:bg-red-600',
+				'hover:bg-red-600',
+				fullWidth === true ? 'w-full' : 'w-fit'
+			)}
+			{...props}
+		>
+			{icon !== undefined && iconEnd !== true && icon}
+			<span>{text}</span>
+			{icon !== undefined && iconEnd === true && icon}
+		</button>
+	)
+}
+
 export const Button = {
 	Base,
-	Simple
+	Simple,
+	Danger
 }

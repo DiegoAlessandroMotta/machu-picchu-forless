@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTourRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tours;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 
 class ToursController extends Controller
 {
@@ -84,6 +85,15 @@ class ToursController extends Controller
 
   public function destroy(string $id)
   {
-    //
+    $tour = Tours::findOrFail($id);
+
+    if ($tour->main_banner) {
+      $imagePath = public_path($tour->main_banner);
+      if (File::exists($imagePath)) {
+        File::delete($imagePath);
+      }
+    }
+
+    $tour->delete();
   }
 }

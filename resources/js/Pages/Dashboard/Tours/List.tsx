@@ -9,7 +9,9 @@ import { Header } from '@/dashboard/components/Header'
 import { SearchInput } from '@/dashboard/components/SearchInput'
 import { DashboardLayout } from '@/layouts/DashboardLayout'
 import { CustomHead } from '@/layouts/CustomHead'
-import { Link } from '@inertiajs/react'
+import { Link, router } from '@inertiajs/react'
+import React, { PropsWithChildren, useState } from 'react'
+import ConfirmDeleteModal from '@/dashboard/components/ConfirmDeleteModal'
 
 interface Tour {
 	id: number
@@ -29,11 +31,46 @@ interface Tour {
 	activity_level: string
 }
 
+const OptionButton = ({
+	children,
+	...props
+}: PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>) => {
+	return (
+		<button
+			className="rounded p-1.5 hover:bg-gray-200 hover:text-gray-600"
+			{...props}
+		>
+			{children}
+		</button>
+	)
+}
+
 interface ToursPageProps extends PageProps {
 	tours: Tour[]
 }
 
 const ListTours = ({ tours }: ToursPageProps) => {
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
+
+	const handleDeleteClick = (tour: Tour) => {
+		setSelectedTour(tour)
+		setIsModalOpen(true)
+	}
+
+	const handleConfirmDelete = () => {
+		if (selectedTour) {
+			router.delete(route('dashboard.tours.destroy', { id: selectedTour }))
+			setIsModalOpen(false)
+			setSelectedTour(null)
+		}
+	}
+
+	const handleCancelDelete = () => {
+		setIsModalOpen(false)
+		setSelectedTour(null)
+	}
+
 	return (
 		<>
 			<CustomHead title="List Tours" />
@@ -70,40 +107,43 @@ const ListTours = ({ tours }: ToursPageProps) => {
 									tours.map((tour) => (
 										<tr
 											key={tour.id}
-											className="transition-colors hover:bg-gray-50 [&>td]:p-4"
+											className="transition-colors hover:bg-gray-50"
 										>
-											<td className="max-w-64 truncate font-medium text-gray-700 hover:underline">
+											<td className="max-w-64 truncate p-4 font-medium text-gray-700 hover:underline">
 												<a href="#" className="contents">
 													{tour.name}
 												</a>
 											</td>
-											<td className="max-w-64 truncate">{tour.code}</td>
+											<td className="max-w-64 truncate p-4">{tour.code}</td>
 											<td>${tour.price}</td>
 											<td>{tour.days}</td>
 											<td>{tour.nights}</td>
 											<td>{tour.max_altitude} m</td>
-											<td className="max-w-48 truncate">{tour.service_type}</td>
-											<td className="max-w-48 truncate">{tour.category}</td>
-											<td className="max-w-48 truncate">
+											<td className="max-w-48 truncate p-4">
+												{tour.service_type}
+											</td>
+											<td className="max-w-48 truncate p-4">{tour.category}</td>
+											<td className="max-w-48 truncate p-4">
 												{tour.activity_level}
 											</td>
 											<td className="text-gray-400">
-												<div className="mx-auto flex items-center gap-0.5">
-													<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
+												<div className="flex items-center gap-0.5 pr-4">
+													<OptionButton>
 														<PencilSquareIcon className="inline-block h-5 w-5" />
-													</button>
-													<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
+													</OptionButton>
+													<OptionButton onClick={() => handleDeleteClick(tour)}>
 														<TrashIcon className="inline-block h-5 w-5" />
-													</button>
+													</OptionButton>
 													<a
-														href={`/tour/${tour.code}`}
+														// href={`/tour/${tour.code}`}
+														href={route('web.tours.show', { id: tour.code })}
 														className="contents"
 														target="_blank"
 														rel="noreferrer"
 													>
-														<button className="rounded p-1 hover:bg-gray-200 hover:text-gray-600">
+														<OptionButton>
 															<EyeIcon className="inline-block h-5 w-5" />
-														</button>
+														</OptionButton>
 													</a>
 												</div>
 											</td>
@@ -114,6 +154,12 @@ const ListTours = ({ tours }: ToursPageProps) => {
 					</div>
 				</Card>
 			</Container>
+
+			<ConfirmDeleteModal
+				isOpen={isModalOpen}
+				onConfirm={handleConfirmDelete}
+				onCancel={handleCancelDelete}
+			/>
 		</>
 	)
 }

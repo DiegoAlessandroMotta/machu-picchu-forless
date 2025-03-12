@@ -28,16 +28,16 @@ Route::get('/tour/{id}', function (string $identifier) {
     'tour' => $tour,
     'countries' => $countries
   ]);
-});
+})->name('web.tours.show');
 
 Route::prefix('/booking')->group(function () {
   Route::get('/', [ReservationController::class, 'create'])->name('reservation');
   Route::post('/', [ReservationController::class, 'store'])->name('reservation.create');
 });
 
-Route::get('/paypal-test', function () {
-  return Inertia::render('PaypalTest');
-});
+// Route::get('/paypal-test', function () {
+//   return Inertia::render('PaypalTest');
+// });
 
 // Route::post('/api/checkout', [PayPalController::class, 'create']);
 
@@ -51,7 +51,8 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
   Route::get('/analytics', [DashboardController::class, 'analytics'])->name('dashboard.analitics');
   Route::get('/tours', [DashboardController::class, 'list_tours'])->name('dashboard.tours.list');
   Route::get('/tours/create', [DashboardController::class, 'create_tours'])->name('dashboard.tours.create');
-  Route::post('/tours/create', [DashboardController::class, 'store_tour'])->name('dashboard.tours.create');
+  Route::post('/tours/store', [DashboardController::class, 'store_tour'])->name('dashboard.tours.store');
+  Route::delete('/tours/{id}', [DashboardController::class, 'delete_tour'])->name('dashboard.tours.destroy');
 });
 
 Route::middleware('auth')->group(function () {

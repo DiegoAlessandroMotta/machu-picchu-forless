@@ -50,4 +50,11 @@ class DashboardController extends Controller
 
     return to_route('dashboard.tours.list');
   }
+
+  public function delete_tour(string $id): RedirectResponse
+  {
+    (new ToursController())->destroy($id);
+
+    return to_route('dashboard.tours.list');
+  }
 }

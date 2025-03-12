@@ -76,7 +76,7 @@ const CreateTour = ({
 	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		post(route('dashboard.tours.create'), {
+		post(route('dashboard.tours.store'), {
 			preserveScroll: true,
 			onSuccess: () => {
 				resetAll()
