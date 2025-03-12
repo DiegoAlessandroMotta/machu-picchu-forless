@@ -24,7 +24,7 @@ class DashboardController extends Controller
 
   public function list_tours(): Response
   {
-    $tours = new ToursController()->index();
+    $tours = (new ToursController())->index();
 
     return Inertia::render('Dashboard/Tours/List', [
       'tours' => $tours

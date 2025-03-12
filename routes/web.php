@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/tour/{id}', function (string $identifier) {
-  $tour = new ToursController()->show($identifier);
+  $tour = (new ToursController())->show($identifier);
   $countries = Country::orderBy('name', 'asc')->get();
 
   return Inertia::render('Tour', [
