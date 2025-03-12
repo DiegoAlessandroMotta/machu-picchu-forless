@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTourRequest;
 use App\Models\ActivityLevels;
 use App\Models\TourCategories;
 use App\Models\TourServiceType;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;

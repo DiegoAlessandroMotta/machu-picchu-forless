@@ -55,6 +55,7 @@ interface HeadProps {
 	description?: string
 	imgUrl?: string
 	url?: string
+	noIndex?: boolean
 }
 
 interface Tour {

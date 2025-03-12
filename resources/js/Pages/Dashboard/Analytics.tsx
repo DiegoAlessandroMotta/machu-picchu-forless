@@ -6,7 +6,7 @@ import { CustomHead } from '@/layouts/CustomHead'
 const Analytics = () => {
 	return (
 		<>
-			<CustomHead title="Analytics" />
+			<CustomHead title="Analytics" noIndex />
 			<Container>
 				<Header title="Analytics" />
 			</Container>

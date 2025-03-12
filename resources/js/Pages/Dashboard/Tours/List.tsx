@@ -73,7 +73,7 @@ const ListTours = ({ tours }: ToursPageProps) => {
 
 	return (
 		<>
-			<CustomHead title="List Tours" />
+			<CustomHead title="List Tours" noIndex />
 			<Container>
 				<Header title="Tours">
 					<Link href={route('dashboard.tours.create')} prefetch>

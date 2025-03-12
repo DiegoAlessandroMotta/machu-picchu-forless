@@ -145,7 +145,7 @@ const CreateTour = ({
 
 	return (
 		<>
-			<CustomHead title="Create Tours" />
+			<CustomHead title="Create Tours" noIndex />
 			<Container>
 				<Header title="Create Tour">
 					<Link href={route('dashboard.tours.list')} prefetch>
