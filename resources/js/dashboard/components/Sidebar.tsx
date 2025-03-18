@@ -6,6 +6,61 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { Link } from '@inertiajs/react'
 import { useSidebar } from './SidebarContext'
 
+interface LinkGroup {
+	title: string
+	items: {
+		href: string
+		active: () => boolean
+		icon?: JSX.Element
+		label: string
+	}[]
+}
+
+const links: LinkGroup[] = [
+	{
+		title: 'Dashboards',
+		items: [
+			{
+				href: route('dashboard'),
+				active: () => route().current('dashboard'),
+				icon: <HomeFilled className="h-4 w-4" />,
+				label: 'Overview'
+			},
+			{
+				href: route('dashboard.analitics'),
+				active: () => route().current('dashboard.analitics'),
+				icon: <ChartBar className="h-4 w-4" />,
+				label: 'Analytics'
+			}
+		]
+	},
+	{
+		title: 'General',
+		items: [
+			{
+				href: route('dashboard.tours.list'),
+				active: () => route().current('dashboard.tours.list'),
+				label: 'Tours'
+			},
+			{
+				href: route('dashboard.tours.create'),
+				active: () => route().current('dashboard.tours.create'),
+				label: 'Create tours'
+			},
+			{
+				href: route('dashboard.categories.list'),
+				active: () => route().current('dashboard.categories.list'),
+				label: 'Categories'
+			},
+			{
+				href: route('dashboard.categories.create'),
+				active: () => route().current('dashboard.categories.create'),
+				label: 'Create categories'
+			}
+		]
+	}
+]
+
 export const Sidebar = () => {
 	const isMobile = useIsMobile()
 	const { open } = useSidebar()
@@ -29,46 +84,21 @@ export const Sidebar = () => {
 				</div>
 
 				<div className="flex flex-col">
-					<ul className="flex flex-col gap-2 px-4 py-2">
-						<h3 className="text-sm font-semibold text-gray-500">Dashboards</h3>
-						<li className="contents">
-							<NavLink
-								href={route('dashboard')}
-								active={route().current('dashboard')}
-							>
-								<HomeFilled className="h-4 w-4" />
-								<span className="ml-2">Overview</span>
-							</NavLink>
-						</li>
-						<li className="contents">
-							<NavLink
-								href={route('dashboard.analitics')}
-								active={route().current('dashboard.analitics')}
-							>
-								<ChartBar className="h-4 w-4" />
-								<span className="ml-2">Analytics</span>
-							</NavLink>
-						</li>
-					</ul>
-					<ul className="flex flex-col gap-2 px-4 py-2">
-						<h3 className="text-sm font-semibold text-gray-500">General</h3>
-						<li className="contents">
-							<NavLink
-								href={route('dashboard.tours.list')}
-								active={route().current('dashboard.tours.list')}
-							>
-								Tours
-							</NavLink>
-						</li>
-						<li className="contents">
-							<NavLink
-								href={route('dashboard.tours.create')}
-								active={route().current('dashboard.tours.create')}
-							>
-								Create tours
-							</NavLink>
-						</li>
-					</ul>
+					{links.map((section, index) => (
+						<ul key={index} className="flex flex-col gap-2 px-4 py-2">
+							<h3 className="text-sm font-semibold text-gray-500">
+								{section.title}
+							</h3>
+							{section.items.map((item, idx) => (
+								<li key={idx} className="contents">
+									<NavLink href={item.href} active={item.active()}>
+										{item.icon !== undefined && item.icon}
+										<span className="ml-2">{item.label}</span>
+									</NavLink>
+								</li>
+							))}
+						</ul>
+					))}
 				</div>
 			</div>
 		</nav>
