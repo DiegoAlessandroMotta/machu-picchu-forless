@@ -7,8 +7,7 @@ import MainLayout from '@/layouts/MainLayout'
 const heroData = {
 	bgImgUrl: '/img/hero-bg.webp',
 	title: 'Let us desing your trip of a lifetime',
-	description:
-		'Descripción sobre lo que se dedica tu empresa y cómo ofreces resultados a tus clientes.',
+	description: '',
 	buttonText: 'More information',
 	buttonHref: '#'
 }

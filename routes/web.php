@@ -4,6 +4,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TourCategoryController;
 use App\Http\Controllers\ToursController;
 use App\Models\Country;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,16 +15,16 @@ Route::get('/', function () {
     ->limit(6)
     ->get();
 
-  return Inertia::render('Home', [
+  return Inertia::render('Web/Home', [
     'tours' => $tours
   ]);
-});
+})->name("web.home");
 
 Route::get('/tour/{id}', function (string $identifier) {
   $tour = (new ToursController())->show($identifier);
   $countries = Country::orderBy('name', 'asc')->get();
 
-  return Inertia::render('Tour', [
+  return Inertia::render('Web/Tour', [
     'tour' => $tour,
     'countries' => $countries
   ]);
