@@ -10,6 +10,8 @@ class TourCategories extends Model
 
   protected $fillable = [
     'code',
-    'name'
+    'name',
+    'description',
+    'main_banner'
   ];
 }

@@ -24,6 +24,17 @@ class TourServiceTypeSeeder extends Seeder
           'name' => 'Group',
         ],
       ]);
+    } else {
+      TourServiceType::insert([
+        [
+          'code' => 'private',
+          'name' => 'Private',
+        ],
+        [
+          'code' => 'group',
+          'name' => 'Group',
+        ],
+      ]);
     }
   }
 }

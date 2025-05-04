@@ -135,7 +135,6 @@ const ListTours = ({ tours }: ToursPageProps) => {
 														<TrashIcon className="inline-block h-5 w-5" />
 													</OptionButton>
 													<a
-														// href={`/tour/${tour.code}`}
 														href={route('web.tours.show', { id: tour.code })}
 														className="contents"
 														target="_blank"
@@ -151,6 +150,11 @@ const ListTours = ({ tours }: ToursPageProps) => {
 									))}
 							</tbody>
 						</table>
+						{tours !== undefined && tours.length < 1 && (
+							<div className="p-4 text-center font-medium text-gray-700">
+								No results
+							</div>
+						)}
 					</div>
 				</Card>
 			</Container>

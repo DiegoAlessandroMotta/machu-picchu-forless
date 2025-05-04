@@ -1,42 +1,24 @@
-import { Input } from '@/components/atoms/Input'
-import { InputCounter } from '@/components/atoms/InputCounter'
-import { SelectInput } from '@/components/atoms/SelectInput'
-import { Label } from '@/components/atoms/Label'
 import { ArrowLeftIcon } from '@/components/icons/ArrowLeftIcon'
 import { Button } from '@/dashboard/components/Button'
 import { Card } from '@/dashboard/components/card'
 import { Container } from '@/dashboard/components/Container'
 import { Header } from '@/dashboard/components/Header'
-import { useCounter } from '@/hooks/useCounter'
 import { DashboardLayout } from '@/layouts/DashboardLayout'
 import { CustomHead } from '@/layouts/CustomHead'
-import { formatUrlCode } from '@/utils/format-values'
 import { Link, useForm } from '@inertiajs/react'
-import React, { useEffect, useState } from 'react'
-import { FileInput } from 'flowbite-react'
+import { useState, memo } from 'react'
+import { Label } from '@/components/atoms/Label'
+import { Input } from '@/components/atoms/Input'
+import { formatUrlCode } from '@/utils/format-values'
 import { CloudArrowUpIcon } from '@/components/icons/CloudArrowUp'
+import { FileInput } from 'flowbite-react'
 
-interface Option {
-	id: string
-	name: string
-}
-
-interface ToursPageProps extends PageProps {
-	serviceTypes: Option[]
-	categories: Option[]
-	activityLevels: Option[]
-}
-
-const FormRow = React.memo(({ children }: React.PropsWithChildren) => {
+const FormRow = memo(({ children }: React.PropsWithChildren) => {
 	return <div className="grid gap-4 md:grid-cols-2">{children}</div>
 })
 FormRow.displayName = 'FormRow'
 
-const CreateTour = ({
-	serviceTypes,
-	categories,
-	activityLevels
-}: ToursPageProps) => {
+const CreateCategory = () => {
 	const {
 		data,
 		setData,
@@ -49,14 +31,7 @@ const CreateTour = ({
 	} = useForm({
 		name: '',
 		code: '',
-		price: '',
-		days: 1,
-		nights: 1,
 		description: '',
-		max_altitude: '',
-		service_type_id: '',
-		category_id: '',
-		activity_level_id: '',
 		main_banner: null as File | null
 	})
 
@@ -67,8 +42,6 @@ const CreateTour = ({
 	} | null>(null)
 
 	const resetAll = () => {
-		daysCounter.resetCounter()
-		nightsCounter.resetCounter()
 		setImagePreview(null)
 		clearErrors()
 		reset()
@@ -77,40 +50,13 @@ const CreateTour = ({
 	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		post(route('dashboard.tours.store'), {
+		post(route('dashboard.categories.create'), {
 			preserveScroll: true,
 			onSuccess: () => {
 				resetAll()
 			}
 		})
 	}
-
-	const daysCounter = useCounter({ min: 0, max: 30, defaultValue: 1 })
-
-	useEffect(() => {
-		setData('days', daysCounter.counter)
-	}, [daysCounter.counter])
-
-	const nightsCounter = useCounter({ min: 0, max: 30, defaultValue: 1 })
-
-	useEffect(() => {
-		setData('nights', nightsCounter.counter)
-	}, [nightsCounter.counter])
-
-	const serviceTypeOptions = serviceTypes.map((option) => ({
-		label: option.name,
-		value: option.id
-	}))
-
-	const categoryOptions = categories.map((option) => ({
-		label: option.name,
-		value: option.id
-	}))
-
-	const activityLevelOptions = activityLevels.map((option) => ({
-		label: option.name,
-		value: option.id
-	}))
 
 	const handleFileInputChange = (
 		event: React.ChangeEvent<HTMLInputElement>
@@ -157,12 +103,12 @@ const CreateTour = ({
 
 	return (
 		<>
-			<CustomHead title="Create Tours" noIndex />
+			<CustomHead title="Create Category" noIndex />
 			<Container>
-				<Header title="Create Tour">
-					<Link href={route('dashboard.tours.list')} prefetch>
+				<Header title="Create Category">
+					<Link href={route('dashboard.categories.list')} prefetch>
 						<Button.Simple
-							text="Tours"
+							text="Categories"
 							icon={<ArrowLeftIcon className="h-5 w-5" />}
 						/>
 					</Link>
@@ -173,7 +119,7 @@ const CreateTour = ({
 					<form onSubmit={submitForm} className="flex flex-col gap-4">
 						<FormRow>
 							<Label
-								text="Tour name *"
+								text="Category name *"
 								className="text-sm font-semibold"
 								error={errors.name}
 								fullWidth
@@ -189,7 +135,7 @@ const CreateTour = ({
 								/>
 							</Label>
 							<Label
-								text="Url code (automatically generated) *"
+								text="Slug (automatically generated) *"
 								className="text-sm font-semibold"
 								error={errors.code}
 								fullWidth
@@ -206,114 +152,6 @@ const CreateTour = ({
 									required
 								/>
 							</Label>
-						</FormRow>
-
-						<FormRow>
-							<Label
-								text="Price *"
-								className="text-sm font-semibold"
-								error={errors.price}
-								fullWidth
-							>
-								<Input
-									value={data.price}
-									onChange={(e) => setData('price', e.target.value)}
-									required
-								/>
-							</Label>
-							<Label
-								text="Max altitude (m.a.s.l) *"
-								className="text-sm font-semibold"
-								error={errors.max_altitude}
-								fullWidth
-							>
-								<Input
-									value={data.max_altitude}
-									onChange={(e) => setData('max_altitude', e.target.value)}
-									required
-								/>
-							</Label>
-						</FormRow>
-
-						<FormRow>
-							<div className="grid gap-4 2xl:grid-cols-2">
-								<Label
-									text="Service type *"
-									className="text-sm font-semibold"
-									error={errors.service_type_id}
-									fullWidth
-								>
-									<SelectInput
-										value={data.service_type_id}
-										options={serviceTypeOptions}
-										onChange={(e) => {
-											setData('service_type_id', e.target.value)
-										}}
-										isControlled
-										required
-									/>
-								</Label>
-								<Label
-									text="Category *"
-									className="text-sm font-semibold"
-									error={errors.category_id}
-									fullWidth
-								>
-									<SelectInput
-										value={data.category_id}
-										options={categoryOptions}
-										onChange={(e) => {
-											setData('category_id', e.target.value)
-										}}
-										isControlled
-										required
-									/>
-								</Label>
-							</div>
-							<div className="grid gap-4 2xl:grid-cols-2">
-								<Label
-									text="Activity level *"
-									className="text-sm font-semibold"
-									error={errors.activity_level_id}
-									fullWidth
-								>
-									<SelectInput
-										value={data.activity_level_id}
-										options={activityLevelOptions}
-										onChange={(e) => {
-											setData('activity_level_id', e.target.value)
-										}}
-										isControlled
-										required
-									/>
-								</Label>
-								<div className="flex flex-wrap gap-4">
-									<Label
-										text="Days *"
-										className="text-sm font-semibold"
-										error={errors.days}
-									>
-										<InputCounter
-											counter={daysCounter.counter}
-											decrementCounter={daysCounter.decrementCounter}
-											incrementCounter={daysCounter.incrementCounter}
-											handleChange={daysCounter.handleChange}
-										/>
-									</Label>
-									<Label
-										text="Nights *"
-										className="text-sm font-semibold"
-										error={errors.nights}
-									>
-										<InputCounter
-											counter={nightsCounter.counter}
-											decrementCounter={nightsCounter.decrementCounter}
-											incrementCounter={nightsCounter.incrementCounter}
-											handleChange={nightsCounter.handleChange}
-										/>
-									</Label>
-								</div>
-							</div>
 						</FormRow>
 
 						<div>
@@ -389,7 +227,7 @@ const CreateTour = ({
 							<Button.Base
 								type="submit"
 								disabled={processing}
-								text="Create tour"
+								text="Create Category"
 							/>
 						</div>
 					</form>
@@ -400,6 +238,6 @@ const CreateTour = ({
 }
 
 const layout: LayoutType = (page) => <DashboardLayout children={page} />
-CreateTour.layout = layout
+CreateCategory.layout = layout
 
-export default CreateTour
+export default CreateCategory

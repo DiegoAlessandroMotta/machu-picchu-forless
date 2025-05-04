@@ -22,6 +22,14 @@ class UserSeeder extends Seeder
           'password' => Hash::make(env('ADMIN_PASSWORD')),
         ]
       ]);
+    } else {
+      User::insert([
+        [
+          'name' => 'Admin',
+          'email' => env('ADMIN_EMAIL'),
+          'password' => Hash::make(env('ADMIN_PASSWORD')),
+        ]
+      ]);
     }
   }
 }

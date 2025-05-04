@@ -36,6 +36,29 @@ class ActivityLevelSeeder extends Seeder
           'name' => 'Challenging',
         ],
       ]);
+    } else {
+      ActivityLevels::insert([
+        [
+          'code' => 'easy',
+          'name' => 'Easy',
+        ],
+        [
+          'code' => 'moderate',
+          'name' => 'Moderate',
+        ],
+        [
+          'code' => 'mid',
+          'name' => 'Mid',
+        ],
+        [
+          'code' => 'hard',
+          'name' => 'Hard',
+        ],
+        [
+          'code' => 'challenging',
+          'name' => 'Challenging',
+        ],
+      ]);
     }
   }
 }

@@ -20,6 +20,13 @@ class CategorySeeder extends Seeder
           'name' => 'Uncategorized',
         ],
       ]);
+    } else {
+      TourCategories::insert([
+        [
+          'code' => 'uncategorized',
+          'name' => 'Uncategorized',
+        ],
+      ]);
     }
   }
 }

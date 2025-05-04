@@ -77,17 +77,25 @@ Route::prefix('/admin')->middleware(['xrobots'])->group(function () {
       Route::get('/analytics', [DashboardController::class, 'analytics'])
         ->name('dashboard.analitics');
 
-      Route::get('/tours', [DashboardController::class, 'list_tours'])
+      Route::get('/tours', [DashboardController::class, 'tours_list'])
         ->name('dashboard.tours.list');
 
-      Route::get('/tours/create', [DashboardController::class, 'create_tours'])
+      Route::get('/tours/create', [DashboardController::class, 'tours_create'])
         ->name('dashboard.tours.create');
 
-      Route::post('/tours/store', [DashboardController::class, 'store_tour'])
+      Route::post('/tours/store', [DashboardController::class, 'tours_store'])
         ->name('dashboard.tours.store');
 
-      Route::delete('/tours/{id}', [DashboardController::class, 'delete_tour'])
+      Route::delete('/tours/{id}', [DashboardController::class, 'tours_delete'])
         ->name('dashboard.tours.destroy');
+
+      Route::get('/categories', [DashboardController::class, 'categories_list'])
+        ->name('dashboard.categories.list');
+
+      Route::get('/categories/create', [DashboardController::class, 'categories_create'])
+        ->name('dashboard.categories.create');
+
+      Route::post('/categories/create', [DashboardController::class, 'categories_store']);
     });
   });
 });

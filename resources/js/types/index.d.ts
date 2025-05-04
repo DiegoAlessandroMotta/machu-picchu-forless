@@ -94,6 +94,15 @@ interface Country {
 	name: string
 }
 
+interface TourCategory {
+	id: number
+	code: string
+	name: string
+	description: string
+	main_banner: string
+	total_tours: number
+}
+
 interface Traveler {
 	id: number
 	first_name: string
